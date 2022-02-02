@@ -16,11 +16,26 @@ const typeDefs = gql`
     category: Category
   }
 
+
+//////
   type Order {
     _id: ID
-    purchaseDate: String
-    products: [Product]
+    buyer_id: [User]
+    seller_id: [User]
+    orderDate: String
+    product_id: [Product]
+    price: Float
   }
+
+
+  type Bid {
+    _id: ID
+    user_id: [User]
+    product_id: [Product]
+  }
+//////
+
+
 
   type User {
     _id: ID
@@ -54,6 +69,13 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
+
+
+
+
+
+
+
   }
 `;
 
