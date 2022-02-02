@@ -11,9 +11,12 @@ const typeDefs = gql`
     name: String
     description: String
     image: String
-    quantity: Int
-    price: Float
-    category: Category
+    date_created: Date
+    expiration_time: Date
+    starting_price: Float
+    current_price: Float
+    bid: [Bid]
+    category: [Category]
   }
 
 
