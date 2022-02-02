@@ -19,8 +19,6 @@ const typeDefs = gql`
     category: [Category]
   }
 
-
-//////
   type Order {
     _id: ID
     buyer_id: [User]
@@ -30,15 +28,11 @@ const typeDefs = gql`
     price: Float
   }
 
-
   type Bid {
     _id: ID
     user_id: [User]
     product_id: [Product]
   }
-//////
-
-
 
   type User {
     _id: ID
