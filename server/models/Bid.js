@@ -9,6 +9,6 @@ const bidSchema = new Schema(
         type: Schema.Types.ObjectId, ref: 'Product'
     }
     }
-    )
+);
 
-    module.exports = Bid;
+module.exports = Bid;
