@@ -23,9 +23,6 @@ const resolvers = {
 
       return await Product.find(params).populate('category');
     },
-    product: async (parent, args, context) => {
-      return await Product.find();
-    },
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
     },
@@ -159,8 +156,9 @@ const resolvers = {
       console.log(context);
       if (context.user) {
         const order = new Order({ products });
-    },
+    }
   }
+}
 };
 
 module.exports = resolvers;
