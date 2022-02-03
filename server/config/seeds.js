@@ -50,14 +50,14 @@ db.once('open', async () => {
         lastName: 'Ocean',
         email: 'Frank@bestmail.com',
         password: 'password10',
-        listing_ids: [products[0]._id]
+        listings: [products[0], products[1]]
     },
     {
         firstName: 'bobby',
         lastName: 'Hopkins',
         email: 'lilbob@bestmail.com',
         password: 'password10',
-        listing_ids: [products[1]._id]
+        listings: [products[1]]
     }]);
 
     console.log('users seeded');
@@ -65,14 +65,12 @@ db.once('open', async () => {
     await Bid.deleteMany();
     const bids = await Bid.insertMany([
         {
-          id: 1,
-          user_id: users[0]._id,
-          product_id: products[0]._id
+          user: users[0],
+          product: products[0]
         },
         {
-          id: 2,
-          user_id: users[1]._id,
-          product_id: products[1]._id
+          user: users[1],
+          product: products[1]
         },
     ])
     
@@ -80,21 +78,21 @@ db.once('open', async () => {
     await Order.deleteMany();
     const orders = await Order.insertMany([
         {
-          seller_id: users[0]._id,
-          buyer_id: users[1]._id,
-          product_id: products[0]._id,
+          seller: users[0],
+          buyer: users[1],
+          product: products[0],
           price: 3.99,
           order_date: 2022-12-07
         },
         {
-          seller_id: users[1]._id,
-          buyer_id: users[0]._id,
-          product_id: products[0]._id,
+          seller: users[1],
+          buyer: users[0],
+          product: products[0],
           price: 45.99,
           order_date: 2022-12-07
         }
     ])
-
+    // console.log(orders);
     console.log('orders seeded');
 
   process.exit();
