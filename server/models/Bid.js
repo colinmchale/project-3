@@ -1,4 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const bidSchema = new Schema(
     {
@@ -10,5 +12,8 @@ const bidSchema = new Schema(
     }
     }
 );
+
+const Bid = mongoose.model('Bid', bidSchema);
+
 
 module.exports = Bid;

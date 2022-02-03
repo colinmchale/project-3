@@ -1,42 +1,19 @@
 const db = require('./connection');
-const { User, Product, Order, Bid } = require('../models');
+const { User, Product, Order, Bid, Category } = require('../models');
 
 db.once('open', async () => {
     await Category.deleteMany();
-
+    
     const categories = await Category.insertMany([
-      { name: 'Food' },
-      { name: 'Household Supplies' },
-      { name: 'Electronics' },
-      { name: 'Books' },
-      { name: 'Toys' }
+        { name: 'Food' },
+        { name: 'Household Supplies' },
+        { name: 'Electronics' },
+        { name: 'Books' },
+        { name: 'Toys' }
     ]);
 
-
-    await User.deleteMany();
-
-    await User.create({
-        firstName: 'Frank',
-        lastName: 'Ocean',
-        email: 'Frank@bestmail.com',
-        password: 'password10',
-        bid_ids: [1, 2, 3],
-        listing_ids: [1, 2, 3],
-        order: [1, 2, 3]
-    });
-
-    await User.create({
-        firstName: 'bobby',
-        lastName: 'Hopkins',
-        email: 'lilbob@bestmail.com',
-        password: 'password10',
-        bid_ids: [4, 5, 6],
-        listing_ids: [4, 5, 6],
-        order: [4, 5, 6]
-    });
-
-    console.log('users seeded');
-
+    console.log('categories seeded');
+    
     await Product.deleteMany();
     const products = await Product.insertMany([
 
@@ -46,11 +23,10 @@ db.once('open', async () => {
           'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
           starting_price: 2.99,
           current_price: 3.99,
-          bid: [1,4],
           image: 'cookie-tin.jpg',
           category: categories[0]._id,
           date_created: 2022-01-31,
-          expiration_date: 2022-12-07,
+          expiration_time: 2022-12-07,
         },
         {
           name: 'Tin of hotdogs',
@@ -58,30 +34,66 @@ db.once('open', async () => {
           'honestly kinda gross',
           starting_price: 19.99,
           current_price: 45.99,
-          bid: [2,5],
           image: 'cookie-tin.jpg',
           category: categories[0]._id,
           date_created: 2022-01-31,
-          expiration_date: 2022-12-07,
+          expiration_time: 2022-12-07,
         }
     ])
 
     console.log('products seeded');
-    
-    
-    await Order.deleteMany();
-    const order = await Order.insertMany([
+
+    await User.deleteMany();
+
+    const users = await User.insertMany([{
+        firstName: 'Frank',
+        lastName: 'Ocean',
+        email: 'Frank@bestmail.com',
+        password: 'password10',
+        // bid_ids: [bids[0]._id, bids[1]._id]
+        listing_ids: [products[0]._id],
+        // order: [orders[1]._id]
+    },
+    {
+        firstName: 'bobby',
+        lastName: 'Hopkins',
+        email: 'lilbob@bestmail.com',
+        password: 'password10',
+        // bid_ids: [4, 5, 6],
+        listing_ids: [products[1]._id],
+        // order: [orders[0]._id]
+    }]);
+
+    console.log('users seeded');
+
+    await Bid.deleteMany();
+    const bids = await Bid.insertMany([
         {
-          seller_id: 1,
-          buyer_id: 2,
-          product_id: 1,
+          id: 1,
+          user_id: users[0]._id,
+          product_id: products[0]._id
+        },
+        {
+          id: 2,
+          user_id: users[1]._id,
+          product_id: products[1]._id
+        },
+    ])
+    
+ 
+    await Order.deleteMany();
+    const orders = await Order.insertMany([
+        {
+          seller_id: users[0]._id,
+          buyer_id: users[1]._id,
+          product_id: products[0]._id,
           price: 3.99,
           order_date: 2022-12-07
         },
         {
-          seller_id: 2,
-          buyer_id: 1,
-          product_id: 2,
+          seller_id: users[1]._id,
+          buyer_id: users[0]._id,
+          product_id: products[0]._id,
           price: 45.99,
           order_date: 2022-12-07
         }
@@ -89,24 +101,6 @@ db.once('open', async () => {
     ])
 
     console.log('orders seeded');
-    
-    
-    await Bid.deleteMany();
-    const bid = await Bid.insertMany([
-        {
-          id: 1,
-          user_id: 1,
-          product_id: 2
-        },
-        {
-          id: 2,
-          user_id: 1,
-          product_id: 2
-        },
-    ])
-
-    console.log('orders seeded');
-
 
   process.exit();
 });
