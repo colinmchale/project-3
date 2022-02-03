@@ -11,8 +11,8 @@ const typeDefs = gql`
     name: String
     description: String
     image: String
-    date_created: Date
-    expiration_time: Date
+    date_created: String
+    expiration_time: String
     starting_price: Float
     current_price: Float
     bid: [Bid]
@@ -66,10 +66,10 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    addProduct(name: String!, description: String!, image: String!, date_created: Date): Product
-    updateProductPrice(_id: ID!, current_price: Number!): Product
-    removeProduct(_id: ID!, expiration_time: Date!): Product
-    updateBid(_id: ID!)
+    addProduct(name: String!, description: String!, image: String!, date_created: String): Product
+    updateProductPrice(_id: ID!, current_price: Int!): Product
+    removeProduct(_id: ID!, expiration_time: String!): Product
+    updateBid(_id: ID!): Bid
     addOrder(products: [ID]!): Order
     
 
