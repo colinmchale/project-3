@@ -53,7 +53,7 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
-    products(_id: ID!, name: String!, description: String!, image: String!): [Product]
+    products(category: ID, name: String): [Product]
     product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
@@ -67,14 +67,16 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     addProduct(name: String!, description: String!, image: String!, date_created: String): Product
+<<<<<<< HEAD
     updateProductPrice(_id: ID!, current_price: Int!): Product
     removeProduct(_id: ID!, expiration_time: String!): Product
+=======
+    updateProductPrice(_id: ID!, current_price: Float!): Product
+    removeProduct(_id: ID!, expiration_time: String!): Product
+    addBid(user_id:ID!, product_id:ID!): Bid
+>>>>>>> dc2e0e7c2616ae10971ec6102fc75239e76b0323
     updateBid(_id: ID!): Bid
     addOrder(products: [ID]!): Order
-    
-
-
-
   }
 `;
 
