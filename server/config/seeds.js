@@ -50,18 +50,14 @@ db.once('open', async () => {
         lastName: 'Ocean',
         email: 'Frank@bestmail.com',
         password: 'password10',
-        // bid_ids: [bids[0]._id, bids[1]._id]
-        listing_ids: [products[0]._id],
-        // order: [orders[1]._id]
+        listing_ids: [products[0]._id]
     },
     {
         firstName: 'bobby',
         lastName: 'Hopkins',
         email: 'lilbob@bestmail.com',
         password: 'password10',
-        // bid_ids: [4, 5, 6],
-        listing_ids: [products[1]._id],
-        // order: [orders[0]._id]
+        listing_ids: [products[1]._id]
     }]);
 
     console.log('users seeded');
@@ -97,7 +93,6 @@ db.once('open', async () => {
           price: 45.99,
           order_date: 2022-12-07
         }
-
     ])
 
     console.log('orders seeded');
