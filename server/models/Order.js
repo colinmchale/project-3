@@ -4,15 +4,15 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
     {
-        buyer_id: {
+        buyer: {
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        seller_id: {
+        seller: {
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        product_id: {
+        product: {
             type: Schema.Types.ObjectId, 
             ref: 'Product',
         },

@@ -21,17 +21,17 @@ const typeDefs = gql`
 
   type Order {
     _id: ID
-    buyer_id: [User]
-    seller_id: [User]
+    buyer: User
+    seller: User
     order_date: String
-    product_id: [Product]
+    product: Product
     price: Float
   }
 
   type Bid {
     _id: ID
-    user_id: [User]
-    product_id: [Product]
+    user: User
+    product: Product
   }
 
   type User {
@@ -39,7 +39,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    listings: [Product]
   }
 
   type Checkout {
@@ -55,10 +55,10 @@ const typeDefs = gql`
     categories: [Category]
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
-    user: User
+    user(_id: ID!): User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    bids: [Product]
+    bids: [Bid]
     bid(_id: ID!): Bid
   }
 
@@ -66,7 +66,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    addProduct(name: String!, description: String!, image: String!, date_created: String): Product
+    addProduct(name: String!, description: String!, image: String, starting_price: Float!, current_price:Float, date_created: String, expiration_time: String): Product
     updateProductPrice(_id: ID!, current_price: Float!): Product
     removeProduct(_id: ID!, expiration_time: String!): Product
     addBid(user_id:ID!, product_id:ID!): Bid
