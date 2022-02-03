@@ -159,6 +159,7 @@ const resolvers = {
       console.log(context);
       if (context.user) {
         const order = new Order({ products });
+      }
     },
   }
 };
