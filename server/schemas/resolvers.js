@@ -8,52 +8,44 @@ const resolvers = {
     categories: async () => {
       return await Category.find();
     },
-    products: async (parent, { category, name }) => {
+    products: async (parent, { category }) => {
       const params = {};
 
       if (category) {
         params.category = category;
       }
 
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
+      // if (name) {
+      //   params.name = {
+      //     $regex: name
+      //   };
+      // }
 
       return await Product.find(params).populate('category');
-    },
-    product: async (parent, args, context) => {
-      return await Product.find();
     },
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
     },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+    user: async (parent, { _id }, context) => {
+      // if (context.user) {
+        const user = await User.findById(_id).populate('listings');
 
         return user;
-      }
+      // }
 
-      throw new AuthenticationError('Not logged in');
+      // throw new AuthenticationError('Not logged in');
     },
     order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
+      // if (context.user) {
+        const order = await Order.findById(_id).populate('seller').populate('buyer').populate('product');
+      
+        // console.log(order.user.firstName);
 
-        return user.orders.id(_id);
-      }
+        return order; 
 
-      throw new AuthenticationError('Not logged in');
+      // }
+
+      // throw new AuthenticationError('Not logged in');
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
@@ -91,9 +83,6 @@ const resolvers = {
 
       return { session: session.id };
     },
-    bids: async () => {
-      return await Bid.find();
-    },
     bid: async (parent, { _id }) => {
       return await Bid.findById(_id).populate('user').populate('product');
     } 
@@ -129,23 +118,23 @@ const resolvers = {
     }
     },
     updateUser: async (parent, args, context) => {
-      if (context.user) {
+      // if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
+      // }
 
-      throw new AuthenticationError('Not logged in');
+      // throw new AuthenticationError('Not logged in');
     },
     addProduct: async (parent, { products }, context) => {
       console.log(context);
-      if (context.user) {
+      // if (context.user) {
         const order = new Order({ products });
 
         // await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
         return order;
-      }
+      // }
 
-      throw new AuthenticationError('Not logged in');
+      // throw new AuthenticationError('Not logged in');
     },
     updateProductPrice: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
@@ -159,9 +148,9 @@ const resolvers = {
       console.log(context);
       if (context.user) {
         const order = new Order({ products });
-      }
-    },
+    }
   }
+}
 };
 
 module.exports = resolvers;

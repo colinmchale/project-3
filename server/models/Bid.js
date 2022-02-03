@@ -4,11 +4,13 @@ const { Schema } = mongoose;
 
 const bidSchema = new Schema(
     {
-    user_id: {
-        type: Schema.Types.ObjectId, ref: 'User'
+    user: {
+        type: Schema.Types.ObjectId, 
+        ref: 'User'
     },
-    product_id: {
-        type: Schema.Types.ObjectId, ref: 'Product'
+    product: {
+        type: Schema.Types.ObjectId, 
+        ref: 'Product'
     }
     }
 );
