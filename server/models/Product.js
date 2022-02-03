@@ -33,6 +33,10 @@ const productSchema = new Schema({
     current_price: {
         type: Number,
         min: 0.01
+    },
+    seller_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     }
 });
 
