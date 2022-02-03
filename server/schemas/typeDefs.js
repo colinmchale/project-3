@@ -23,7 +23,7 @@ const typeDefs = gql`
     _id: ID
     buyer_id: [User]
     seller_id: [User]
-    orderDate: String
+    order_date: String
     product_id: [Product]
     price: Float
   }
