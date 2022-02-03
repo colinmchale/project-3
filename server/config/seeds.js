@@ -14,29 +14,6 @@ db.once('open', async () => {
 
     console.log('categories seeded');
     
-    await User.deleteMany();
-
-    const users = await User.insertMany([{
-        firstName: 'Frank',
-        lastName: 'Ocean',
-        email: 'Frank@bestmail.com',
-        password: 'password10',
-        // bid_ids: [bids[0]._id, bids[1]._id]
-        // listing_ids: [products[0]._id],
-        // order: [orders[1]._id]
-    },
-    {
-        firstName: 'bobby',
-        lastName: 'Hopkins',
-        email: 'lilbob@bestmail.com',
-        password: 'password10',
-        // bid_ids: [4, 5, 6],
-        // listing_ids: [products[1]._id],
-        // order: [orders[0]._id]
-    }]);
-
-    console.log('users seeded');
-    
     await Product.deleteMany();
     const products = await Product.insertMany([
 
@@ -50,7 +27,6 @@ db.once('open', async () => {
           category: categories[0]._id,
           date_created: 2022-01-31,
           expiration_time: 2022-12-07,
-          seller_id: users[0]._id
         },
         {
           name: 'Tin of hotdogs',
@@ -62,12 +38,29 @@ db.once('open', async () => {
           category: categories[0]._id,
           date_created: 2022-01-31,
           expiration_time: 2022-12-07,
-          seller_id: users[1]._id
         }
     ])
 
     console.log('products seeded');
 
+    await User.deleteMany();
+
+    const users = await User.insertMany([{
+        firstName: 'Frank',
+        lastName: 'Ocean',
+        email: 'Frank@bestmail.com',
+        password: 'password10',
+        listing_ids: [products[0]._id]
+    },
+    {
+        firstName: 'bobby',
+        lastName: 'Hopkins',
+        email: 'lilbob@bestmail.com',
+        password: 'password10',
+        listing_ids: [products[1]._id]
+    }]);
+
+    console.log('users seeded');
 
     await Bid.deleteMany();
     const bids = await Bid.insertMany([
@@ -100,7 +93,6 @@ db.once('open', async () => {
           price: 45.99,
           order_date: 2022-12-07
         }
-
     ])
 
     console.log('orders seeded');

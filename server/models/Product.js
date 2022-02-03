@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-const { Schema, model } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const productSchema = new Schema({
     // Mongo automatically gives each model an ID right? Or should I include it here?
@@ -13,8 +11,7 @@ const productSchema = new Schema({
         type: String,
     },
     image: {
-        type: String,
-        required: true
+        type: String
     },
     date_created: {
         type: Date,
@@ -34,9 +31,9 @@ const productSchema = new Schema({
         type: Number,
         min: 0.01
     },
-    seller_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+    category: {
+        type: Schema.Types.ObjectId, 
+        ref: 'Category'
     }
 });
 
