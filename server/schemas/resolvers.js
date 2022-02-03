@@ -23,6 +23,9 @@ const resolvers = {
 
       return await Product.find(params).populate('category');
     },
+    product: async (parent, args, context) => {
+      return await Product.find();
+    },
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
     },
@@ -137,7 +140,7 @@ const resolvers = {
       if (context.user) {
         const order = new Order({ products });
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        // await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
         return order;
       }
@@ -156,13 +159,6 @@ const resolvers = {
       console.log(context);
       if (context.user) {
         const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw new AuthenticationError('Not logged in');
     },
   }
 };
