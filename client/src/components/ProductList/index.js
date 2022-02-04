@@ -27,7 +27,7 @@ const ProductList = ( {products} ) => {
         <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/products/${product._id}`}
-            />
+            >Check Me Out!</Link>
         </div>
       </div>
     </div>
