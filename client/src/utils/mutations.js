@@ -71,9 +71,23 @@ mutation addBid(
             }
      }`;
 
-// export const ADD_ORDER = gql`
-//   mutation addOrder($products: ID!, $user: ID!, $buyer_id: ID!, $seller_id: ID!, $price: Number) {
-//     addOrder(products: $products, user: $user, buyer_id: $buyer_id, seller_id: $seller, ) {
-// `;
+  export const ADD_PRODUCT = gql`
+  mutation addProduct($name: String!, $description: String!, 
+    $starting_price: Float!, $category:ID!, $image:String) {
+    addProduct(name:$name, description:$description, 
+      starting_price:$starting_price, category:$category, image:$image) {
+        _id
+        name
+        description
+        image
+        starting_price
+        date_created
+        expiration_time
+        category
+        {
+          _id
+        }
+    }
+  }`;
 
 

@@ -127,13 +127,14 @@ const resolvers = {
       console.log('add bid resolver')
       return await Bid.create({...args, user_id: context.user._id})
     },
-    updateUser: async (parent, args, context) => {
-      // if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+    // updateUserListing: async (parent, { product }, context) => {
+    //   // if (context.user) {
+    //     const listings = 
+    //     return await User.findByIdAndUpdate(context.user._id, { product }, { new: true });
       // }
 
       // throw new AuthenticationError('Not logged in');
-    },
+    // },
     addProduct: async (parent, { name, description, image, starting_price, current_price, category }, context) => {
       // console.log(context);
       // if (context.user) {
