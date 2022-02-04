@@ -5,7 +5,14 @@ export const QUERY_USER = gql`
     user {
       firstName
       lastName
-
+      listings {
+      _id
+      name
+      description
+      image
+      starting_price
+      current_price
+      }
     }
   }
 `;

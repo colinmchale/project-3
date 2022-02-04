@@ -156,12 +156,12 @@ const resolvers = {
       return Product.findOneAndDelete({ _id: productId });
     },
     addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
+      // console.log(context);
+      // if (context.user) {
         const order = new Order({ products });
+      // }
     }
   }
-}
 };
 
 module.exports = resolvers;
