@@ -17,6 +17,27 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      firstName
+      lastName
+      email
+      listings {
+        _id
+        name
+        description
+        image
+        starting_price
+        current_price
+        date_created
+        expiration_time
+      }
+    }
+  }
+`;
+
 export const QUERY_PRODUCTS = gql`
   {
     products {

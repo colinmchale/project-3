@@ -25,8 +25,6 @@ db.once('open', async () => {
           current_price: 3.99,
           image: 'cookie-tin.jpg',
           category: categories[0]._id,
-          date_created: 2022-01-31,
-          expiration_time: 2022-12-07,
         },
         {
           name: 'Tin of hotdogs',
@@ -36,8 +34,6 @@ db.once('open', async () => {
           current_price: 45.99,
           image: 'cookie-tin.jpg',
           category: categories[0]._id,
-          date_created: 2022-01-31,
-          expiration_time: 2022-12-07,
         }
     ])
 
