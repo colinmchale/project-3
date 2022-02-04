@@ -1,15 +1,20 @@
 import React from 'react';
-
+import { useState } from 'react'; 
 // Import the `useParams()` hook from React Router
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import PlaceBid from '../components/BidForm';
+
 
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
 
 import { QUERY_PRODUCT } from '../utils/queries';
 
+
 const SingleProduct = () => {
+
+  const [toggle, setToggle] = useState(true);
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { productId } = useParams();
 
@@ -25,35 +30,62 @@ const SingleProduct = () => {
     return <div>Loading...</div>;
   }
   return (
-      
-    <div className="my-3">
-      <h3 className="card-header bg-dark text-light p-2 m-0">
-        {product.name} <br />
-        <span style={{ fontSize: '1rem' }}>
-          {/* had this thought on {thought.createdAt} */}
-        </span>
-      </h3>
-      <div className="bg-light py-4">
-        <blockquote
-          className="p-4"
-          style={{
-            fontSize: '1.5rem',
-            fontStyle: 'italic',
-            border: '2px dotted #1a1a1a',
-            lineHeight: '1.5',
-          }}
-        >
-          {product.description}
-        </blockquote>
+
+//   <div>
+//     <div className="row">
+//     <div className="col s12 m6">
+//       <div className="card">
+//         <div className="card-image">
+//         <img src={`/images/${product.image}`} alt='screenshot'/>
+//           <span className="card-title">{product.name}</span>
+//           <a className="btn-floating halfway-fab waves-effect waves-light red"><i className="material-icons">bid</i></a>
+//         </div>
+//         <div className="card-content">
+//             <div>
+//                 <div>
+                    
+//                 </div>
+//             </div>
+//           <p>{product.description}</p>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//   </div>
+
+  <div className='row section'>
+      <div className='col s6 image-holder'>
+        <img src={`/images/${product.image}`} alt='screenshot'/>
+      </div>
+      <div className='col s6 image-holder'>
+        <div className='col s12 card'>
+        <div className='col s12 product-title'><h3>{product.name}</h3></div>
+        <div className='col s12 price-box'>
+        <div className='col s6 price'>
+            <h6>Description: {product.description}</h6>
+            <h6>Starting Price: ${product.starting_price}</h6>
+            <h6>Current Bid: ${product.current_price}</h6>
+            <h6>Expiration Date: {product.expiration_time}</h6>
+            {console.log(product.expiration_time)}
+            <div className="input-field col s6">
+          {/* <input placeholder="Enter Bid" id="first_name" type="text" className="validate"/>
+          <label for="first_name">Enter Bid!</label>
+          <button className="btn waves-effect waves-light" type="submit" name="action">Submit!
+  </button> */}
+  <PlaceBid productId={product._id} current_price={product.current_price} toggle={toggle} setToggle={setToggle} />
+        </div>
+        </div>
+        <div className='col s6 bid-buttons'>
+        </div>
+        </div>
+      </div>
       </div>
 
-      {/* <div className="my-5">
-        <CommentList comments={thought.comments} />
-      </div>
-      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <CommentForm thoughtId={thought._id} />
-      </div> */}
-    </div>
+
+  </div>
+ 
+      
+    
   );
 };
 
