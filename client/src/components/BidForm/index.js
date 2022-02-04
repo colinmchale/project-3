@@ -43,6 +43,7 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
 
     function expirationDate () {
       document.getElementById('bidBtn').style.visibility = "none";
+      document.getElementById('bidInput').style.visibility = "none";
     }
 
     setTimeout(() => {
@@ -84,6 +85,7 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
                 placeholder="Add your bid..."
                 value={newBid}
                 className="form-input w-100"
+                id="bidInput"
                 style={{ lineHeight: '1.5' }}
                 onChange={handleChange}
               ></textarea>
