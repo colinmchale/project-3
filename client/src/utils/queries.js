@@ -66,3 +66,12 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
+
+export const QUERY_CATEGORIES = gql`
+  {
+  categories{
+    _id
+    name
+  }
+}
+`;

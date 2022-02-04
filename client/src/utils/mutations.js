@@ -45,6 +45,25 @@ mutation addBid(
    }`
    ;
 
+  //  export const ADD_PRODUCT = gql`
+  //  mutation addProduct(
+  //  $name: String!
+  //  $description: String!
+  //  $image: String!
+  //  $starting_price: Number!
+  //  $category: String!){
+  //  addProduct(
+  //  name: $name
+  //  description: $description
+  //  image: $image
+  //  starting_price: $starting_price
+  //  category: $category
+  //  )
+  //  }
+  //  `
+
+
+
    export const UPDATE_PRODUCT_PRICE = gql`
    mutation updateProductPrice($_id: ID!, $current_price: Float!){
             updateProductPrice(_id: $_id, current_price: $current_price){
@@ -65,9 +84,6 @@ mutation addBid(
         date_created
         expiration_time
         category
-        {
-          _id
-        }
     }
   }`;
 
