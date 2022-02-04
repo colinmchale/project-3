@@ -3,7 +3,7 @@ import { useState } from "react";
 // Import the `useParams()` hook from React Router
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import PlaceBid from "../components/BidForm";
+import BidForm from "../components/BidForm";
 
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
@@ -25,8 +25,9 @@ const SingleProduct = () => {
 
   const product = data?.product || {};
   console.log(product);
-console.log( parseInt(product.expiration_time))
+  console.log( parseInt(product.expiration_time))
   console.log(new Date(parseInt(product.expiration_time)).toString());
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -69,16 +70,17 @@ console.log( parseInt(product.expiration_time))
               <h6>Starting Price: ${product.starting_price}</h6>
               <h6>Current Bid: ${product.current_price}</h6>
               <h6>Expiration Date: {new Date(parseInt(product.expiration_time)).toLocaleString()}</h6>
-              {console.log(new Date(product.expiration_time))}
+              {console.log(new Date(product.expiration_time).toLocaleString())}
               <div className="input-field col s6">
                 {/* <input placeholder="Enter Bid" id="first_name" type="text" className="validate"/>
           <label for="first_name">Enter Bid!</label>
           <button className="btn waves-effect waves-light" type="submit" name="action">Submit!
   </button> */}
-                <PlaceBid
+                <BidForm
                   productId={product._id}
                   current_price={product.current_price}
                   toggle={toggle}
+                  expiration_time={product.expiration_time}
                   setToggle={setToggle}
                 />
               </div>
@@ -89,6 +91,7 @@ console.log( parseInt(product.expiration_time))
       </div>
     </div>
   );
+
 };
 
 export default SingleProduct;
