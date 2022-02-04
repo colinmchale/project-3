@@ -30,6 +30,7 @@ const typeDefs = gql`
 
   type Bid {
     _id: ID
+    price: Int
     user: User
     product: Product
   }
@@ -69,7 +70,7 @@ const typeDefs = gql`
     addProduct(name: String!, description: String!, image: String, starting_price: Float!, current_price:Float, date_created: String, expiration_time: String): Product
     updateProductPrice(_id: ID!, current_price: Float!): Product
     removeProduct(_id: ID!, expiration_time: String!): Product
-    addBid(user_id:ID!, product_id:ID!): Bid
+    addBid(product_id:ID!, price:Float!): Bid
     updateBid(_id: ID!): Bid
     addOrder(products: [ID]!): Order
   }
