@@ -117,6 +117,10 @@ const resolvers = {
         throw new AuthenticationError('couldnt add user');
     }
     },
+    addBid: async( parent, args, context) => {
+      console.log('add bid resolver')
+      return await Bid.create({...args, user_id: context.user._id})
+    },
     updateUser: async (parent, args, context) => {
       // if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
@@ -136,10 +140,9 @@ const resolvers = {
 
       // throw new AuthenticationError('Not logged in');
     },
-    updateProductPrice: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+    updateProductPrice: async (parent, { _id, current_price }, context) => {
+       
+      return await Product.findByIdAndUpdate(_id, { current_price: current_price });
     },
     removeProduct: async (parent, { productId }) => {
       return Product.findOneAndDelete({ _id: productId });

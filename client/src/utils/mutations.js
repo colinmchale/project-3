@@ -32,6 +32,26 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_BID = gql`
+mutation addBid(
+   $product_id: ID!
+   $price: Float!){
+   addBid(
+   product_id: $product_id
+   price: $price
+   ){
+   price
+   }
+   }`
+   ;
+
+   export const UPDATE_PRODUCT_PRICE = gql`
+   mutation updateProductPrice($_id: ID!, $current_price: Float!){
+            updateProductPrice(_id: $_id, current_price: $current_price){
+            current_price
+            }
+     }`;
+
 // export const ADD_ORDER = gql`
 //   mutation addOrder($products: ID!, $user: ID!, $buyer_id: ID!, $seller_id: ID!, $price: Number) {
 //     addOrder(products: $products, user: $user, buyer_id: $buyer_id, seller_id: $seller, ) {
