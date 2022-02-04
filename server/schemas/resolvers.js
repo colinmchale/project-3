@@ -35,6 +35,12 @@ const resolvers = {
 
       // throw new AuthenticationError('Not logged in');
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('listings');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     order: async (parent, { _id }, context) => {
       // if (context.user) {
         const order = await Order.findById(_id).populate('seller').populate('buyer').populate('product');
@@ -128,14 +134,22 @@ const resolvers = {
 
       // throw new AuthenticationError('Not logged in');
     },
-    addProduct: async (parent, { products }, context) => {
-      console.log(context);
+    addProduct: async (parent, { name, description, image, starting_price, current_price, category }, context) => {
+      // console.log(context);
       // if (context.user) {
-        const order = new Order({ products });
+        
+        const newProduct = await Product.create({
+          name,
+          description,
+          image,
+          starting_price,
+          current_price,
+          category
+        });
+        console.log(newProduct);
+        // await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
 
-        // await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
+        return newProduct;
       // }
 
       // throw new AuthenticationError('Not logged in');
@@ -148,12 +162,12 @@ const resolvers = {
       return Product.findOneAndDelete({ _id: productId });
     },
     addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
+      // console.log(context);
+      // if (context.user) {
         const order = new Order({ products });
+      // }
     }
   }
-}
 };
 
 module.exports = resolvers;

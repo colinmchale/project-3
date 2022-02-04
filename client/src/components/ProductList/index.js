@@ -13,17 +13,17 @@ const ProductList = ( {products} ) => {
 
       {products &&
         products.map((product) => (
-<div class="row" key={product._id}>
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="card-image">
+<div className="row" key={product._id}>
+    <div className="col s12 m7">
+      <div className="card">
+        <div className="card-image">
           <img src={`images/${product.image}`} alt='screenshot'/>
-          <span class="card-title">{product.name}</span>
+          <span className="card-title">{product.name}</span>
         </div>
-        <div class="card-content">
+        <div className="card-content">
         <p>{product.description}</p>
         </div>
-        <div class="card-action">
+        <div className="card-action">
         <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/products/${product._id}`}
