@@ -42,19 +42,24 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
     }
 
     function expirationDate () {
-      document.getElementById('bidBtn').style.visibility = "none";
-      document.getElementById('bidInput').style.visibility = "none";
+      document.getElementById('bidBtn').style.display = "none";
+      document.getElementById('bidInput').style.display = "none";
     }
 
     setTimeout(() => {
       let expiration = expiration_time
-      if (expiration <= Date.now) {
+      if (expiration <= Date.now()) {
+        console.log('im an expiration');
         console.log(expiration);
+        console.log('the time currently?');
+        console.log(Date.now());
         expirationDate();
       } else {
         document.getElementById('bidBtn').style.visibility = "visible";
+        document.getElementById('bidInput').style.visibility = "visible";
+
       }
-    }, 1000);
+    }, 100);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
