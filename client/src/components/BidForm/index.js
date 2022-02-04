@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_BID } from '../../utils/mutations';
 import { UPDATE_PRODUCT_PRICE } from '../../utils/mutations';
 
-const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
+const PlaceBid = ({ productId, current_price, expiration_time }) => {
     
     const currentHighBid = current_price;
     const [newBid, setHighBid] = useState('');
@@ -34,12 +34,26 @@ const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
               //   setCharacterCount(value.length);
               })
               window.location.reload();
-              // Look at making this a omponent refresh rather than a page refresh^
+              // Look at making this a component refresh rather than a page refresh^
             }
         } catch (err) {
             console.error(err);
         };
     }
+
+    function expirationDate () {
+      document.getElementById('bidBtn').style.visibility = "none";
+    }
+
+    setTimeout(() => {
+      let expiration = expiration_time
+      if (expiration <= Date.now) {
+        console.log(expiration);
+        expirationDate();
+      } else {
+        document.getElementById('bidBtn').style.visibility = "visible";
+      }
+    }, 1000);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -76,7 +90,7 @@ const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
             </div>
     
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+              <button className="btn btn-primary btn-block py-3" type="submit" id="bidBtn">
                 Submit Bid
               </button>
             </div>
