@@ -33,7 +33,8 @@ const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
                     
               //   setCharacterCount(value.length);
               })
-            setToggle(!toggle);
+              window.location.reload();
+              // Look at making this a omponent refresh rather than a page refresh^
             }
         } catch (err) {
             console.error(err);
@@ -49,7 +50,6 @@ const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
     
       return (
         <div>
-          <h4>What are your thoughts on this thought?</h4>
           <p
             // className=
             // {`m-0 
@@ -77,7 +77,7 @@ const PlaceBid = ({ productId, current_price, toggle, setToggle }) => {
     
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Comment
+                Submit Bid
               </button>
             </div>
           </form>
