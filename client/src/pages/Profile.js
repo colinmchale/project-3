@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import ProductList from '../components/ProductList';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
+import { QUERY_CATEGORIES } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
 
 const Profile = () => {
+    const { loading: loadingCategory, data: categoryData } = useQuery(QUERY_CATEGORIES);
     const [formState, setFormState] = useState({ name: '', description: '',  image:'', starting_price:'', category:'' });
     const { loading, data } = useQuery(QUERY_ME);
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
@@ -15,9 +17,11 @@ const Profile = () => {
         event.preventDefault();
         try {
             // const mutationResponse = 
-            return await addProduct({
-                variables: { name: formState.email, description: formState.password, image: formState.image, starting_price: formState.starting_price, category: formState.category },
+            const newProduct = await addProduct({
+                variables: { name: formState.name, description: formState.description, image: formState.image, starting_price: parseFloat(formState.starting_price), category: formState.category },
             });
+            console.log(newProduct);
+            return newProduct;
             // const token = mutationResponse.data.login.token;
             // Auth.login(token);
         } catch (e) {
@@ -31,11 +35,14 @@ const Profile = () => {
             ...formState,
             [name]: value,
         });
+
+        console.log(formState);
+        console.log(formState.starting_price);
+        console.log(typeof formState.starting_price);
+        console.log(typeof parseFloat(formState.starting_price));
     };
 
-
     const products = data?.me.listings || [];
-    console.log(products)
     return (
         <div className="container">
             <div className="flex-row justify-center">
@@ -64,8 +71,8 @@ const Profile = () => {
                             </div>
                             <div className="row">
                                 <div className="input-field col s3">
-                                    <input name='price' onChange={handleChange} id="price" type="text" className="validate" />
-                                    <label for="price">Price</label>
+                                    <input name='starting_price' onChange={handleChange} id="starting_price" type="text" className="validate" />
+                                    <label for="starting_price">Price</label>
                                 </div>
                             </div>
                         </div>
@@ -78,13 +85,19 @@ const Profile = () => {
                         <div className="input-field col s12">
                             <select name='category' onChange={handleChange} className="browser-default">
                                 <option value="" disabled selected>Choose Product Category</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                                {categoryData?.categories.map(category => 
+                                    <option value={category._id} name='category'>{`${category.name}`}</option>
+
+                                )}
+                                {/* <option value="2">Option 2</option>
+                                <option value="3">Option 3</option> */}
                             </select>
                             {/* <label>Materialize Select</label> */}
                         </div>
                     </div>
+                    <div className="flex-row flex-end">
+          <button type="submit">Submit</button>
+        </div>
                 </form>
             </div>
         </div>
