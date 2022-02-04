@@ -124,14 +124,22 @@ const resolvers = {
 
       // throw new AuthenticationError('Not logged in');
     },
-    addProduct: async (parent, { products }, context) => {
-      console.log(context);
+    addProduct: async (parent, { name, description, image, starting_price, current_price, category }, context) => {
+      // console.log(context);
       // if (context.user) {
-        const order = new Order({ products });
+        
+        const newProduct = await Product.create({
+          name,
+          description,
+          image,
+          starting_price,
+          current_price,
+          category
+        });
+        console.log(newProduct);
+        // await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
 
-        // await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
+        return newProduct;
       // }
 
       // throw new AuthenticationError('Not logged in');

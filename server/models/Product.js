@@ -20,7 +20,7 @@ const productSchema = new Schema({
     },
     expiration_time: {
         type: Date,
-        default: Date.now + 7
+        default: Date.now
     },
     starting_price: {
         type: Number,
