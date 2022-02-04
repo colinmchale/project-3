@@ -77,15 +77,13 @@ db.once('open', async () => {
           seller: users[0],
           buyer: users[1],
           product: products[0],
-          price: 3.99,
-          order_date: 2022-12-07
+          price: 3.99
         },
         {
           seller: users[1],
           buyer: users[0],
           product: products[0],
-          price: 45.99,
-          order_date: 2022-12-07
+          price: 45.99
         }
     ])
     // console.log(orders);
