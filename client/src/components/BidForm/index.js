@@ -53,6 +53,7 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
         expirationDate();
       } else {
         document.getElementById('bidBtn').style.visibility = "visible";
+        document.getElementById('bidInput').style.visibility = "visible";
       }
     }, 1000);
 
