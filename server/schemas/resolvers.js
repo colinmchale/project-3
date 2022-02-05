@@ -148,7 +148,7 @@ const resolvers = {
           category
         });
         console.log(newProduct);
-        // await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
+        await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
 
         return newProduct;
       // }

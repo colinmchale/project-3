@@ -70,7 +70,7 @@ const SingleProduct = () => {
               <h6>Starting Price: ${product.starting_price}</h6>
               <h6>Current Bid: ${product.current_price}</h6>
               <h6>Expiration Date: {new Date(parseInt(product.expiration_time)).toLocaleString()}</h6>
-              {console.log(new Date(product.expiration_time).toLocaleString())}
+              {/* {console.log(new Date(product.expiration_time).toLocaleString())} */}
               <div className="input-field col s6">
                 {/* <input placeholder="Enter Bid" id="first_name" type="text" className="validate"/>
           <label for="first_name">Enter Bid!</label>

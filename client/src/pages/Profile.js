@@ -21,6 +21,7 @@ const Profile = () => {
                 variables: { name: formState.name, description: formState.description, image: formState.image, starting_price: parseFloat(formState.starting_price), category: formState.category },
             });
             console.log(newProduct);
+            window.location.reload();
             return newProduct;
             // const token = mutationResponse.data.login.token;
             // Auth.login(token);

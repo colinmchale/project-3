@@ -46,16 +46,26 @@ function Nav() {
 
   return (
     <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
+      {/* <h1> */}
+      {/* </h1> */}
 
-      <nav>
-        {showNavigation()}
-      </nav>
+      <nav className='right'>
+      {/* <nav> */}
+    <div className="nav-wrapper ">
+        <Link className ='brand-logo valign-wrapper' to="/">
+          <img src='images/bid.png' />
+           -paddle
+        </Link>
+      {/* <a href="#" class="brand-logo">Logo</a> */}
+      {/* <ul id="nav-mobile" class="right hide-on-med-and-down"> */}
+        {/* <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li> */}
+      {/* </ul> */}
+        <div className='right hide-on-med-and-down'>{showNavigation()}</div>
+    </div>
+  </nav>
+      {/* </nav> */}
     </header>
   );
 }
