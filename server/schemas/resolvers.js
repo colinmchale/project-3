@@ -2,11 +2,19 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Order, Bid, Category } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const ObjectId = require('mongodb').ObjectID;
+
 
 const resolvers = {
   Query: {
     categories: async () => {
       return await Category.find();
+    },
+    bids: async (parent, {product}) => {
+      return await Bid.find({product: product}).populate('user').populate('product');
+    },
+    userBids: async (parent, {user}) => {
+      return await Bid.find({user: ObjectId(user)}).populate('user').populate('product');
     },
     products: async (parent, { category }) => {
       const params = {};
@@ -25,6 +33,9 @@ const resolvers = {
     },
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
+    },
+    users: async () => {
+      return await User.find().populate('listings');
     },
     user: async (parent, { _id }, context) => {
       // if (context.user) {
@@ -111,6 +122,11 @@ const resolvers = {
   
       return { token, user };
     },
+    addOrder: async( parent, args, context) => {
+      console.log('add order')
+      const order = await Order.create({...args})
+      return order;
+    },
     addUser: async (parent, args) => {
         try {
         console.log('add user resolver')
@@ -125,7 +141,7 @@ const resolvers = {
     },
     addBid: async( parent, args, context) => {
       console.log('add bid resolver')
-      return await Bid.create({...args, user_id: context.user._id})
+      return await Bid.create({...args, user: context.user._id})
     },
     // updateUserListing: async (parent, { product }, context) => {
     //   // if (context.user) {
@@ -162,12 +178,12 @@ const resolvers = {
     removeProduct: async (parent, { productId }) => {
       return Product.findOneAndDelete({ _id: productId });
     },
-    addOrder: async (parent, { products }, context) => {
-      // console.log(context);
-      // if (context.user) {
-        const order = new Order({ products });
-      // }
-    }
+    // addOrder: async (parent, { products }, context) => {
+    //   // console.log(context);
+    //   // if (context.user) {
+    //     const order = new Order({ products });
+    //   // }
+    // }
   }
 };
 

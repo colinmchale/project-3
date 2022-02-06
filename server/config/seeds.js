@@ -61,12 +61,16 @@ db.once('open', async () => {
     await Bid.deleteMany();
     const bids = await Bid.insertMany([
         {
+          price: 45.23,
           user: users[0],
-          product: products[0]
+          product: products[0],
+          seller: users[0]
         },
         {
+          price: 89.45,
           user: users[1],
-          product: products[1]
+          product: products[1],
+          seller: users[1]
         },
     ])
     

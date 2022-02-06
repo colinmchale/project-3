@@ -1,5 +1,23 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      firstName
+      lastName
+      listings {
+      _id
+      name
+      description
+      image
+      starting_price
+      current_price
+      }
+    }
+  }
+`;
+
 export const QUERY_USER = gql`
   {
     user {
@@ -45,6 +63,13 @@ export const QUERY_PRODUCTS = gql`
       name
       description
       image
+      date_created
+      expiration_time
+      starting_price
+      current_price
+      category {
+        _id
+      }
     }
   }
 `;
@@ -75,3 +100,23 @@ export const QUERY_CATEGORIES = gql`
   }
 }
 `;
+
+export const QUERY_BIDS = gql`
+query bids($product: ID!) {
+  bids(product: $product) {
+    user {
+      _id
+    }
+    seller{
+      _id
+    }
+    product {
+      _id
+      name
+      description
+    }
+    price
+  }
+}
+`
+

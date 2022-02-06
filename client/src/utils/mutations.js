@@ -34,11 +34,13 @@ export const ADD_USER = gql`
 
 export const ADD_BID = gql`
 mutation addBid(
-   $product_id: ID!
-   $price: Float!){
+   $product: ID!
+   $price: Float!
+   $seller: ID!){
    addBid(
-   product_id: $product_id
+   product: $product
    price: $price
+   seller: $seller
    ){
    price
    }
@@ -79,5 +81,13 @@ mutation addBid(
         starting_price
     }
   }`;
+
+  export const ADD_ORDER = gql`
+  mutation addOrder($buyer: ID! $seller: ID! $product: ID! $price: Float!){
+  addOrder(buyer: $buyer seller: $seller product: $product price: $price){
+  buyer
+  }
+  }
+  `;
 
 
