@@ -11,14 +11,14 @@ const bidSchema = new Schema(
         type: Schema.Types.ObjectId, 
         ref: 'User'
     },
+    seller: {
+        type: Schema.Types.ObjectId, 
+        ref: 'User'
+    },
     product: {
         type: Schema.Types.ObjectId, 
         ref: 'Product'
     },
-    seller: {
-        type: Schema.Types.ObjectId, 
-        ref: 'User'
-    }
     }
 );
 

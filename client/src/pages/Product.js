@@ -8,7 +8,8 @@ import BidForm from "../components/BidForm";
 
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
-import { QUERY_PRODUCT } from "../utils/queries";
+
+import { QUERY_PRODUCT, QUERY_BIDS, QUERY_ORDERS } from "../utils/queries";
 
 
 

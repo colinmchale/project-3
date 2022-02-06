@@ -35,6 +35,23 @@ export const QUERY_USER = gql`
   }
 `;
 
+// export const QUERY_USERS = gql`
+//   {
+//     user {
+//       firstName
+//       lastName
+//       listings {
+//       _id
+//       name
+//       description
+//       image
+//       starting_price
+//       current_price
+//       }
+//     }
+//   }
+// `;
+
 export const QUERY_ME = gql`
   query me {
     me {
@@ -102,21 +119,67 @@ export const QUERY_CATEGORIES = gql`
 `;
 
 export const QUERY_BIDS = gql`
-query bids($product: ID!) {
+  query bids($product: ID!) {
   bids(product: $product) {
     user {
       _id
+      firstName
+      lastName
     }
-    seller{
-      _id
+    seller
+    {
+      firstName
+      lastName
     }
     product {
-      _id
       name
       description
     }
     price
   }
 }
-`
+`;
 
+export const QUERY_USER_BIDS = gql`
+  query userBids($user: ID!) {
+  userBids(user: $user) {
+    user {
+      _id
+      firstName
+      lastName
+    }
+    seller
+    {
+      firstName
+      lastName
+    }
+    product {
+      name
+      description
+    }
+    price
+  }
+}
+`;
+
+export const QUERY_ORDERS = gql`
+query orders($product: ID!) {
+  orders(product: $product) {
+    buyer {
+      _id
+      firstName
+      lastName
+    }
+    seller
+    {
+      firstName
+      lastName
+    }
+    product {
+      name
+      description
+    }
+    price
+  }
+}
+`;

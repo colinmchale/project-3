@@ -31,6 +31,7 @@ const typeDefs = gql`
     _id: ID
     price: Float
     user: User
+    seller: User
     product: Product
     seller: User
   }
@@ -56,13 +57,15 @@ const typeDefs = gql`
     categories: [Category]
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
+    users: [User]
     user(_id: ID!): User
     users: [User]
     me: User
+    orders(product: ID!): Order
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    bids(product: ID!): [Bid]
     userBids(user: ID!): [Bid]
+    bids(product: ID!): [Bid]
     bid(_id: ID!): Bid
   }
 
@@ -73,9 +76,9 @@ const typeDefs = gql`
     updateUserListing(user:ID!, product:ID!): User
     updateProductPrice(_id: ID!, current_price: Float!): Product
     removeProduct(_id: ID!, expiration_time: String!): Product
-    addBid(price:Float!, product:ID!, seller:ID!): Bid
+    addBid(product:ID!, price:Float!): Bid
     updateBid(_id: ID!): Bid
-    addOrder(buyer: ID!, seller: ID!, product: ID!, price: Float!): Order
+    addOrder(product: ID!): Order
   }
 `;
 

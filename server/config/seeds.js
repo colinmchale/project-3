@@ -46,14 +46,14 @@ db.once('open', async () => {
         lastName: 'Ocean',
         email: 'Frank@bestmail.com',
         password: 'password10',
-        listings: [products[0], products[1]]
+        listings: [products[1]]
     },
     {
         firstName: 'bobby',
         lastName: 'Hopkins',
         email: 'lilbob@bestmail.com',
         password: 'password10',
-        listings: [products[1]]
+        listings: [products[0]]
     }]);
 
     console.log('users seeded');
@@ -63,35 +63,35 @@ db.once('open', async () => {
         {
           price: 45.23,
           user: users[0],
+          seller: users[1],
           product: products[0],
-          seller: users[0]
         },
         {
           price: 89.45,
           user: users[1],
+          seller: users[0],
           product: products[1],
-          seller: users[1]
         },
     ])
     
  
     await Order.deleteMany();
-    const orders = await Order.insertMany([
-        {
-          seller: users[0],
-          buyer: users[1],
-          product: products[0],
-          price: 3.99
-        },
-        {
-          seller: users[1],
-          buyer: users[0],
-          product: products[0],
-          price: 45.99
-        }
-    ])
+    // const orders = await Order.insertMany([
+    //     {
+    //       seller: users[0],
+    //       buyer: users[1],
+    //       product: products[0],
+    //       price: 3.99
+    //     },
+    //     {
+    //       seller: users[1],
+    //       buyer: users[0],
+    //       product: products[0],
+    //       price: 45.99
+    //     }
+    // ])
     // console.log(orders);
-    console.log('orders seeded');
+    // console.log('orders seeded');
 
   process.exit();
 });
