@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 // import { useQuery } from '@apollo/client';
 // import { QUERY_PRODUCT } from '../utils/queries';
 import { ADD_BID } from '../../utils/mutations';
-import { UPDATE_PRODUCT_PRICE } from '../../utils/mutations';
+import { UPDATE_PRODUCT_PRICE, ADD_ORDER } from '../../utils/mutations';
+// import { QUERY_USERS } from '../../utils/queries';
 
-const PlaceBid = ({ productId, current_price, expiration_time }) => {
+const PlaceBid = ({ productId, current_price, expiration_time, order, bid }) => {
     
+    const [expired, setExpired] = useState(false);
     const currentHighBid = current_price;
     const [newBid, setHighBid] = useState('');
     //   const [characterCount, setCharacterCount] = useState(0);
 
+    // const [getUsers] = useMutation(QUERY_USERS);
+    const [addOrder] = useMutation(ADD_ORDER);
     const [addBid] = useMutation(ADD_BID);
     const [updateProductPrice] = useMutation(UPDATE_PRODUCT_PRICE);
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -20,8 +25,9 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
         console.log(typeof newBid);
 
         try {
+            // const seller =
             const { data } = await addBid({
-                variables: { product_id: productId, price: parseFloat(newBid) },
+                variables: { product: productId, price: parseFloat(newBid)},
             });
             console.log(data);
             console.log(newBid);
@@ -46,14 +52,15 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
       document.getElementById('bidInput').style.display = "none";
     }
 
-    setTimeout(() => {
+    setInterval(() => {
       let expiration = expiration_time
       if (expiration <= Date.now()) {
-        console.log('im an expiration');
-        console.log(expiration);
-        console.log('the time currently?');
-        console.log(Date.now());
+        // console.log('im an expiration');
+        // console.log(expiration);
+        // console.log('the time currently?');
+        // console.log(Date.now());
         expirationDate();
+        setExpired(true);
       } else {
         document.getElementById('bidBtn').style.visibility = "visible";
         document.getElementById('bidInput').style.visibility = "visible";

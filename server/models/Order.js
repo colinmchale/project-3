@@ -15,6 +15,7 @@ const orderSchema = new Schema(
         product: {
             type: Schema.Types.ObjectId, 
             ref: 'Product',
+            unique: true
         },
         order_date: {
             type: Date,
