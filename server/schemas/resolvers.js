@@ -135,7 +135,7 @@ const resolvers = {
 
       // throw new AuthenticationError('Not logged in');
     // },
-    addProduct: async (parent, { name, description, image, starting_price, current_price, category }, context) => {
+    addProduct: async (parent, { name, description, image, starting_price, category }, context) => {
       // console.log(context);
       // if (context.user) {
         
@@ -144,11 +144,11 @@ const resolvers = {
           description,
           image,
           starting_price,
-          current_price,
+          // current_price,
           category
         });
         console.log(newProduct);
-        // await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
+        await User.findByIdAndUpdate(context.user._id, { $push: { listings: newProduct } });
 
         return newProduct;
       // }
