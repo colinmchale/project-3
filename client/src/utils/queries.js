@@ -1,5 +1,23 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      firstName
+      lastName
+      listings {
+      _id
+      name
+      description
+      image
+      starting_price
+      current_price
+      }
+    }
+  }
+`;
+
 export const QUERY_USER = gql`
   {
     user {
@@ -17,22 +35,22 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_USERS = gql`
-  {
-    user {
-      firstName
-      lastName
-      listings {
-      _id
-      name
-      description
-      image
-      starting_price
-      current_price
-      }
-    }
-  }
-`;
+// export const QUERY_USERS = gql`
+//   {
+//     user {
+//       firstName
+//       lastName
+//       listings {
+//       _id
+//       name
+//       description
+//       image
+//       starting_price
+//       current_price
+//       }
+//     }
+//   }
+// `;
 
 export const QUERY_ME = gql`
   query me {
@@ -62,6 +80,13 @@ export const QUERY_PRODUCTS = gql`
       name
       description
       image
+      date_created
+      expiration_time
+      starting_price
+      current_price
+      category {
+        _id
+      }
     }
   }
 `;

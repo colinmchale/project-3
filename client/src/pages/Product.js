@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import BidForm from "../components/BidForm";
+// import moment from 'moment';
 
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
 
 import { QUERY_PRODUCT, QUERY_BIDS, QUERY_ORDERS } from "../utils/queries";
+
+
 
 const SingleProduct = () => {
   // let expiration_time = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
@@ -27,6 +30,32 @@ const SingleProduct = () => {
   console.log(product);
   console.log( parseInt(product.expiration_time))
   console.log(new Date(parseInt(product.expiration_time)).toString());
+  
+
+  setInterval(() => {
+    let timer = document.getElementById('timer');
+    let time = document.getElementById('time');
+    // timer.style.display = "none";
+    // time.style.display = "none";
+    let totalSecondsRemaing = (Math.floor((product.expiration_time - Date.now())/1000));
+    let remainingMinutes = Math.floor(totalSecondsRemaing/60);
+    // console.log(remainingMinutes)
+    
+    let remainingSeconds = totalSecondsRemaing - (remainingMinutes*60);
+    // if(remainingMinutes){
+      // timer.style.display = "visible";
+      // time.style.display = "visible";
+  // time.textContent =remainingSeconds;
+    // }
+
+
+}, 1000)
+
+
+  
+  
+
+  
 
 
   if (loading) {
@@ -70,6 +99,7 @@ const SingleProduct = () => {
               <h6>Starting Price: ${product.starting_price}</h6>
               <h6>Current Bid: ${product.current_price}</h6>
               <h6>Expiration Date: {new Date(parseInt(product.expiration_time)).toLocaleString()}</h6>
+              <h6 id='timer'>Time Remaining: </h6><h6 id='time'>0</h6>
               {/* {console.log(new Date(product.expiration_time).toLocaleString())} */}
               <div className="input-field col s6">
                 {/* <input placeholder="Enter Bid" id="first_name" type="text" className="validate"/>

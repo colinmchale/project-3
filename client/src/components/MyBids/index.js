@@ -2,10 +2,10 @@ import React from 'react';
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from 'react-router-dom';
 
-const ProductList = ( {products} ) => {
+const MyBids = ( {products} ) => {
   if (!products.length) {
 
-    return <h3>No Thoughts Yet</h3>;
+    return <h3>No bids yet... well.. whaterya waitin for?! </h3>;
   }
   console.log(products[0])
   return (
@@ -45,4 +45,4 @@ const ProductList = ( {products} ) => {
   
 };
 
-export default ProductList;
+export default MyBids;

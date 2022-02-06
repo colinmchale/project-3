@@ -41,12 +41,12 @@ mutation addBid(
    price: $price
    ){
    price
-   }
    user
     {
       firstName
       lastName
     }
+   }
    }`
    ;
 

@@ -9,6 +9,12 @@ const resolvers = {
     categories: async () => {
       return await Category.find();
     },
+    bids: async (parent, {product}) => {
+      return await Bid.find({product: product}).populate('user').populate('product');
+    },
+    userBids: async (parent, {user}) => {
+      return await Bid.find({user: ObjectId(user)}).populate('user').populate('product');
+    },
     products: async (parent, { category }) => {
       const params = {};
 
@@ -124,6 +130,11 @@ const resolvers = {
   
       return { token, user };
     },
+    // addOrder: async( parent, args, context) => {
+    //   console.log('add order')
+    //   const order = await Order.create({...args})
+    //   return order;
+    // },
     addUser: async (parent, args) => {
         try {
         console.log('add user resolver')
