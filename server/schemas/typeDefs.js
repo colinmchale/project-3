@@ -31,7 +31,6 @@ const typeDefs = gql`
     _id: ID
     price: Float
     user: User
-    seller: User
     product: Product
     seller: User
   }
@@ -57,7 +56,6 @@ const typeDefs = gql`
     categories: [Category]
     products(category: ID, name: String): [Product]
     product(_id: ID!): Product
-    users: [User]
     user(_id: ID!): User
     users: [User]
     me: User

@@ -33,22 +33,22 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
     event.preventDefault();
 
     try {
-      function findSeller(users){
-      for (let i = 0; i < users.length; i++) {
-          let listingData = users[i].listings;
-          for(let j=0; j < listingData.length; j++){
-            if(listingData[j]._id === productId){
-                  return users[i]._id;
-                }
-              }
-            };
-          };
+      // function findSeller(users){
+      // for (let i = 0; i < users.length; i++) {
+      //     let listingData = users[i].listings;
+      //     for(let j=0; j < listingData.length; j++){
+      //       if(listingData[j]._id === productId){
+      //             return users[i]._id;
+      //           }
+      //         }
+      //       };
+      //     };
           
           
 
 
       const { data } = await addBid({
-        variables: { price: parseFloat(newBid), product: productId,  seller: findSeller(users) },
+        variables: { price: parseFloat(newBid), product: productId },
       });
       console.log(data);
       console.log(newBid);

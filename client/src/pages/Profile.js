@@ -18,13 +18,13 @@ const Profile = () => {
     // console.log('myId');
     // console.log(typeof myId);
     // console.log(myId);
-    // const { loading: loadingUserBids, data: userBidData } = useQuery(QUERY_USER_BIDS, {
-    //     variables: {user: myId },
-    // });
+    const { loading: loadingUserBids, data: userBidData } = useQuery(QUERY_USER_BIDS, {
+        variables: {user: myId },
+    });
 
-    // const myBids = userBidData?.bids
-    // console.log('userBidData')
-    // console.log(userBidData)
+    const myBids = userBidData?.bids
+    console.log('userBidData')
+    console.log(userBidData)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();

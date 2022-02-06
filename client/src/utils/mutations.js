@@ -39,15 +39,14 @@ mutation addBid(
    addBid(
    product: $product
    price: $price
-   seller: $seller
    ){
    price
-   }
    user
     {
       firstName
       lastName
     }
+   }
    }`
    ;
 
