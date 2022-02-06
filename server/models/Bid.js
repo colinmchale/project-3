@@ -7,11 +7,15 @@ const bidSchema = new Schema(
     price: {
         type: Number
     },
-    user_id: {
+    user: {
         type: Schema.Types.ObjectId, 
         ref: 'User'
     },
-    product_id: {
+    seller: {
+        type: Schema.Types.ObjectId, 
+        ref: 'User'
+    },
+    product: {
         type: Schema.Types.ObjectId, 
         ref: 'Product'
     }
