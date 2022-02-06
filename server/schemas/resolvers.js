@@ -2,11 +2,18 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Order, Bid, Category } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const ObjectId = require('mongodb').ObjectID;
 
 const resolvers = {
   Query: {
     categories: async () => {
       return await Category.find();
+    },
+    bids: async (parent, {product}) => {
+      return await Bid.find({product: product}).populate('user').populate('product');
+    },
+    userBids: async (parent, {user}) => {
+      return await Bid.find({user: ObjectId(user)}).populate('user').populate('product');
     },
     products: async (parent, { category }) => {
       const params = {};
@@ -26,6 +33,9 @@ const resolvers = {
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
     },
+    users: async () => {
+      return await User.find().populate('listings');
+    },
     user: async (parent, { _id }, context) => {
       // if (context.user) {
         const user = await User.findById(_id).populate('listings');
@@ -40,6 +50,9 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate('listings');
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    orders: async (parent, { product }) => {
+      return await Order.findOne({product: ObjectId(product)}).populate('buyer').populate('seller').populate('product');
     },
     order: async (parent, { _id }, context) => {
       // if (context.user) {
@@ -89,6 +102,12 @@ const resolvers = {
 
       return { session: session.id };
     },
+    userBids: async (parent, { user }) => {
+      return await Bid.find({user: ObjectId(user)}).populate('user').populate('seller').populate('product');
+    },
+    bids: async (parent, { product }) => {
+      return await Bid.find({product: ObjectId(product)}).populate('user').populate('seller').populate('product');
+    },
     bid: async (parent, { _id }) => {
       return await Bid.findById(_id).populate('user').populate('product');
     } 
@@ -111,6 +130,11 @@ const resolvers = {
   
       return { token, user };
     },
+    // addOrder: async( parent, args, context) => {
+    //   console.log('add order')
+    //   const order = await Order.create({...args})
+    //   return order;
+    // },
     addUser: async (parent, args) => {
         try {
         console.log('add user resolver')
@@ -123,18 +147,20 @@ const resolvers = {
         throw new AuthenticationError('couldnt add user');
     }
     },
-    addBid: async( parent, args, context) => {
-      console.log('add bid resolver')
-      return await Bid.create({...args, user_id: context.user._id})
-    },
-    // updateUserListing: async (parent, { product }, context) => {
-    //   // if (context.user) {
-    //     const listings = 
-    //     return await User.findByIdAndUpdate(context.user._id, { product }, { new: true });
-      // }
+    addBid: async( parent, { product, price }, context) => {
+      console.log('trying to find seller')
+      const seller = await User.findOne({listings: ObjectId(product)})
+      console.log(seller)
+      
+      const bid = await Bid.create({
+        user: context.user._id,
+        seller: seller,
+        product: product,
+        price: price,
+      })
 
-      // throw new AuthenticationError('Not logged in');
-    // },
+      return bid
+    },
     addProduct: async (parent, { name, description, image, starting_price, category }, context) => {
       // console.log(context);
       // if (context.user) {
@@ -160,12 +186,24 @@ const resolvers = {
       return await Product.findByIdAndUpdate(_id, { current_price: current_price });
     },
     removeProduct: async (parent, { productId }) => {
-      return Product.findOneAndDelete({ _id: productId });
+      return await Product.findOneAndDelete({ _id: productId });
     },
-    addOrder: async (parent, { products }, context) => {
-      // console.log(context);
-      // if (context.user) {
-        const order = new Order({ products });
+    addOrder: async (parent, { product }, context) => {
+    //   // console.log(context);
+    //   // if (context.user) {
+       
+      const bid = await Bid.findOne({product: ObjectId(product)}, null, { sort: { price: -1 }, limit: 1 }).populate('user').populate('seller').populate('product');
+      console.log('this is the high bid')
+      console.log(bid)
+      const order = await Order.create({ 
+        buyer: bid.user,
+        seller: bid.seller,
+        product: bid.product,
+        price: bid.price
+      });
+
+      return order;
+
       // }
     }
   }

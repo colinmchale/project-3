@@ -2,29 +2,26 @@ import React from 'react';
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from 'react-router-dom';
 
-
 const ProductList = ( {products} ) => {
   if (!products.length) {
 
-    return <h3>No Thoughts Yet</h3>;
+    return <h3>No listings to yet!</h3>;
   }
-  console.log(products[0])
   return (
     <div>
 
 
-      {
-      // products &&
-        products.filter((product) => product.expiration_time > Date.now()).map((product) => ( 
+      {products &&
+        products.map((product) => (
 <div className="row" key={product._id}>
     <div className="col s12 m7">
       <div className="card">
         <div className="card-image">
           <img src={`images/${product.image}`} alt='screenshot'/>
+          <span className="card-title">{product.name}</span>
         </div>
         <div className="card-content">
-          <span className="card-title center">{product.name}</span>
-        <p className="center">{product.description}</p>
+        <p>{product.description}</p>
         </div>
         <div className="card-action">
         <Link
@@ -35,7 +32,6 @@ const ProductList = ( {products} ) => {
       </div>
     </div>
   </div>
-</>
             ))
             }
   </div>

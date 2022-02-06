@@ -2,11 +2,10 @@ import React from 'react';
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from 'react-router-dom';
 
-
-const ProductList = ( {products} ) => {
+const MyBids = ( {products} ) => {
   if (!products.length) {
 
-    return <h3>No Thoughts Yet</h3>;
+    return <h3>No bids yet... well.. whaterya waitin for?! </h3>;
   }
   console.log(products[0])
   return (
@@ -21,10 +20,10 @@ const ProductList = ( {products} ) => {
       <div className="card">
         <div className="card-image">
           <img src={`images/${product.image}`} alt='screenshot'/>
+          <span className="card-title">{product.name}</span>
         </div>
         <div className="card-content">
-          <span className="card-title center">{product.name}</span>
-        <p className="center">{product.description}</p>
+        <p>{product.description}</p>
         </div>
         <div className="card-action">
         <Link
@@ -35,7 +34,6 @@ const ProductList = ( {products} ) => {
       </div>
     </div>
   </div>
-</>
             ))
             }
   </div>
@@ -47,4 +45,4 @@ const ProductList = ( {products} ) => {
   
 };
 
-export default ProductList;
+export default MyBids;
