@@ -50,6 +50,8 @@ mutation addBid(
    }`
    ;
 
+   
+
   //  export const ADD_PRODUCT = gql`
   //  mutation addProduct(
   //  $name: String!
