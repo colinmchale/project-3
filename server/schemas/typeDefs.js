@@ -65,6 +65,7 @@ const typeDefs = gql`
     userBids(user: ID!): [Bid]
     bids(product: ID!): [Bid]
     bid(_id: ID!): Bid
+    userOrders(user: ID!): Order
   }
 
   type Mutation {

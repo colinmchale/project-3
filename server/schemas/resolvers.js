@@ -51,6 +51,9 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    userOrders: async (parent, { user }) => {
+      return await Order.findOne({buyer: ObjectId(user)}).populate('buyer').populate('seller').populate('product');
+    },
     orders: async (parent, { product }) => {
       return await Order.findOne({product: ObjectId(product)}).populate('buyer').populate('seller').populate('product');
     },

@@ -187,3 +187,27 @@ query orders($product: ID!) {
   }
 }
 `;
+
+export const QUERY_USERS_ORDERS = gql`
+query orders($user: ID!) {
+  orders(user: $user) {
+    buyer {
+      _id
+      firstName
+      lastName
+    }
+    seller
+    {
+      firstName
+      lastName
+    }
+    product {
+      name
+      description
+      image
+    }
+    price
+  }
+}
+`;
+
