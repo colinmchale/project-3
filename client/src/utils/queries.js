@@ -187,3 +187,30 @@ query orders($product: ID!) {
   }
 }
 `;
+
+export const QUERY_USERS_ORDERS = gql`
+query userOrders($user: ID!) {
+  userOrders(user: $user) {
+    buyer {
+      _id
+      firstName
+      lastName
+    }
+    seller
+    {
+      firstName
+      lastName
+    }
+    product {
+      name
+      description
+      image
+    }
+    price
+  }
+}
+`;
+
+// export const QUERY_CHECKOUT = gql`
+// query checkout($product: ID!)
+// `
