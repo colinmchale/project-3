@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import ProductList from '../components/ProfilePageProductList';
-import MyBids from '../components/MyBids';
+import ProductList from '../components/ProductList';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { QUERY_CATEGORIES } from '../utils/queries';
-import { QUERY_USER_BIDS } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
@@ -14,17 +12,6 @@ const Profile = () => {
     const [formState, setFormState] = useState({ name: '', description: '',  image:'', starting_price:'', category:'' });
     const { loading, data } = useQuery(QUERY_ME);
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
-    const myId = data?.me._id;
-    // console.log('myId');
-    // console.log(typeof myId);
-    // console.log(myId);
-    const { loading: loadingUserBids, data: userBidData } = useQuery(QUERY_USER_BIDS, {
-        variables: {user: myId },
-    });
-
-    const myBids = userBidData?.bids
-    console.log('userBidData')
-    console.log(userBidData)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -63,23 +50,12 @@ const Profile = () => {
                 <div className="col-12 col-md-8 mb-3">
                     {loading ? (
                         <div>Loading...</div>
-                    ) : ( <>
-                    <h5>My Listings!</h5>
+                    ) : (
                         <ProductList
                             products={products}
-                            title="Some Food for Thoughts..." /> </>
+                            title="Some Food for Thoughts..." />
                     )}
                 </div>
-                {/* <div className="col-12 col-md-8 mb-3">
-                    {loading ? (
-                        <div>Loading...</div>
-                    ) : ( <>
-                    <h5>Products I'm Bidding on!</h5>
-                        <MyBids
-                            products={myBids}
-                            title="Some Food for Thoughts..." /> </>
-                    )}
-                </div> */}
             </div>
             <div className="row">
                 <h5>Create Product Listing</h5>
