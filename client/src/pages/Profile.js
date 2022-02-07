@@ -58,6 +58,15 @@ const Profile = () => {
         console.log(typeof parseFloat(formState.starting_price));
     };
 
+    const styles = {
+        createProduct: {
+            paddingTop: "15%"
+        },
+        spacing: {
+            paddingTop: "10%"
+        },
+    }
+
     const products = data?.me.listings || [];
     return (
         <div className="container center">
@@ -66,7 +75,10 @@ const Profile = () => {
                     {loading ? (
                         <div>Loading...</div>
                     ) : ( <>
-                    <h5>Listings</h5>
+                    <div style={styles.spacing}>
+                        <h3>Listings</h3>
+                    </div>
+                    <br></br>
                         <ProductList
                             className="align-content-center justify-content-center"
                             products={products}
@@ -77,15 +89,20 @@ const Profile = () => {
                     {loading ? (
                         <div>Loading...</div>
                     ) : ( <>
-                    <h5>Products I'm Bidding on!</h5>
+                    <div style={styles.spacing}>
+                        <h3>Products I'm Bidding on!</h3>
+                    </div>
+                    <br></br>
                         <MyBids
                             myBids={myBids}
                             title="Some Food for Thoughts..." /> </>
                     )}
                 </div>
             </div>
-            <div className="row">
-                <h5>Create Product Listing</h5>
+            <div className="row" style={styles.createProduct}>
+                <h3>Create Product Listing</h3>
+                <br></br>
+                <br></br>
                 <form onSubmit={handleFormSubmit} className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
