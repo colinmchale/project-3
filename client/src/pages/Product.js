@@ -71,6 +71,12 @@ const SingleProduct = () => {
     BidCard: {
       display: "flex",
       justifyContent: "center"
+    },
+    image: {
+      maxWidth: "70%",
+      maxHeight: "70%",
+      marginTop: "6%",
+      marginRight: "15%"
     }
   };
 
@@ -81,7 +87,7 @@ const SingleProduct = () => {
     <div className="row section">
       <div style={styles.bigDiv}>
         <div className="col s6 image-holder" style={styles.imageCard}>
-          <img src={`/images/${product.image}`} alt="screenshot" />
+          <img src={`/images/${product.image}`} alt="screenshot" className="center" style={styles.image}/>
         </div>
         <br></br>
         <div className="col s6 image-holder">
