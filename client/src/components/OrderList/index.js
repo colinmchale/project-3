@@ -2,36 +2,35 @@ import React from "react";
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from "react-router-dom";
 
-const ProductList = ({ products }) => {
+const OrderList = ({ products }) => {
   if (!products.length) {
-    return <h7>No Listings Yet</h7>;
+    return <h7>You have not made any purchases yet!</h7>;
   }
   console.log(products[0]);
   return (
     <div>
+        <h7>My Orders</h7>
       {
         // products &&
         products
-          .filter((product) => product.expiration_time > Date.now())
           .map((product) => (
-            <div className="row" key={product._id}>
+            <div className="row" key={product.product._id}>
               <div className="col s12 m7">
                 <div className="card">
                   <div className="card-image">
-                    <img src={`images/${product.image}`} alt="screenshot" />
+                    <img src={`images/${product.product.image}`} alt="screenshot" />
                   </div>
                   <div className="card-content">
-                    <span className="card-title center">{product.name}</span>
-                    <p className="center">{product.description}</p>
-                    <p className="center">Starting Price: ${product.starting_price}</p>
-                    <p className="center">Current Price: ${product.current_price}</p>
+                    <span className="card-title center">{product.product.name}</span>
+                    <p className="center">{product.product.description}</p>
                   </div>
+                  <div>Selling Price: ${product.price}</div>
                   <div className="card-action">
                     <Link
                       className="btn btn-primary btn-block btn-squared"
-                      to={`/products/${product._id}`}
+                      to={`/products/${product.product._id}`}
                     >
-                      Check Me Out!
+                      Pay Now!
                     </Link>
                   </div>
                 </div>
@@ -43,4 +42,4 @@ const ProductList = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default OrderList;

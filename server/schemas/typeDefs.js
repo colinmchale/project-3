@@ -59,6 +59,7 @@ const typeDefs = gql`
     user(_id: ID!): User
     users: [User]
     me: User
+    userOrders(user: ID!): [Order]
     orders(product: ID!): Order
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout

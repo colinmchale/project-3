@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const MyBids = ( {myBids} ) => {
   if (!myBids.length) {
 
-    return <h3>No bids yet... well.. whaterya waitin for?! </h3>;
+    return <h7>No bids yet... well.. whaterya waitin for?! </h7>;
   }
   // console.log(products[0])
   return (
