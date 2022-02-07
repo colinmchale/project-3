@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ProductList from '../components/ProductList';
+import MyBids from '../components/MyBids';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
+import { QUERY_USER_BIDS } from '../utils/queries';
 import { QUERY_CATEGORIES } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
