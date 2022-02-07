@@ -48,7 +48,7 @@ function Nav() {
   };
 
   return (
-    <header className="flex-row px-1">
+    <header className="flex-row">
       <nav className="right">
         <div className="nav-wrapper">
           <Link className="brand-logo" to="/">
@@ -59,7 +59,6 @@ function Nav() {
           </div>
         </div>
       </nav>
-      {/* </nav> */}
     </header>
   );
 }
