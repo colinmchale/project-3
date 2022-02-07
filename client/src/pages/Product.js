@@ -54,7 +54,7 @@ const SingleProduct = () => {
     // if(remainingMinutes){
       // timer.style.display = "visible";
       // time.style.display = "visible";
-  // time.textContent =remainingSeconds;
+  // time.textContent =remainingMinutes + ' minutes and ' + remainingSeconds + ' seconds.';
     // }
 
 
@@ -100,6 +100,8 @@ const SingleProduct = () => {
                 </h6>
                 {/* {console.log(new Date(product.expiration_time).toLocaleString())} */}
                 <div className="input-field col s6">
+                  {/* <h6 id='timer'>Seconds Remaining: </h6>
+                  <h6 id='time'>Seconds Remaining: </h6> */}
                   {/* <input placeholder="Enter Bid" id="first_name" type="text" className="validate"/>
           <label for="first_name">Enter Bid!</label>
           <button className="btn waves-effect waves-light" type="submit" name="action">Submit!

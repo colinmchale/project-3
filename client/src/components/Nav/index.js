@@ -65,9 +65,9 @@ function Nav() {
       <nav className='right'>
       {/* <nav> */}
     <div className="nav-wrapper" style={styles.navBar}>
-        <Link className ='brand-logo valign-wrapper' to="/">
+        <Link className ='brand-logo valign-wrapper section' to="/">
           <img src='images/bid.png' />
-           Paddle
+           <span className='brand-text section'>Paddle</span>
            
         </Link>
       {/* <a href="#" class="brand-logo">Logo</a> */}

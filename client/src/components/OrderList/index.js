@@ -2,6 +2,9 @@ import React from "react";
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from "react-router-dom";
 
+
+
+
 const OrderList = ({ products }) => {
   if (!products.length) {
     return <h7>You have not made any purchases yet!</h7>;
@@ -26,6 +29,12 @@ const OrderList = ({ products }) => {
                   </div>
                   <div>Selling Price: ${product.price}</div>
                   <div className="card-action">
+                    {/* <button onClick={launchStripe}
+                      className="btn btn-primary btn-block btn-squared"
+                      to={`/products/${product.product._id}`}
+                    >
+                      Pay Now!
+                    </button> */}
                     <Link
                       className="btn btn-primary btn-block btn-squared"
                       to={`/products/${product.product._id}`}

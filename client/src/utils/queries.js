@@ -211,6 +211,7 @@ query userOrders($user: ID!) {
 }
 `;
 
+
 // export const QUERY_CHECKOUT = gql`
 // query checkout($product: ID!)
 // `
