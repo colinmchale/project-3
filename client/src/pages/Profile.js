@@ -58,7 +58,7 @@ const Profile = () => {
 
     const products = data?.me.listings || [];
     return (
-        <div className="container">
+        <div className="container center">
             <div className="flex-row justify-center">
                 <div className="col-12 col-md-8 mb-3">
                     {loading ? (
@@ -66,6 +66,7 @@ const Profile = () => {
                     ) : ( <>
                     <h5>My Listings!</h5>
                         <ProductList
+                            className="align-content-center justify-content-center"
                             products={products}
                             title="Some Food for Thoughts..." /> </>
                     )}
