@@ -44,6 +44,19 @@ function Nav() {
     }
   }
 
+  const styles = {
+    title: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      // marginTop: "40px"
+
+    },
+    navBar: {
+      
+    }
+  }
+
   return (
     <header className="flex-row px-1">
       {/* <h1> */}
@@ -51,10 +64,11 @@ function Nav() {
 
       <nav className='right'>
       {/* <nav> */}
-    <div className="nav-wrapper ">
+    <div className="nav-wrapper" style={styles.navBar}>
         <Link className ='brand-logo valign-wrapper' to="/">
           <img src='images/bid.png' />
-           -paddle
+           Paddle
+           
         </Link>
       {/* <a href="#" class="brand-logo">Logo</a> */}
       {/* <ul id="nav-mobile" class="right hide-on-med-and-down"> */}
