@@ -76,9 +76,9 @@ mutation addBid(
 
   export const ADD_PRODUCT = gql`
   mutation addProduct($name: String! $description: String! 
-    $starting_price: Float! $category:ID! $image:String) {
+    $starting_price: Float! $category:ID!) {
     addProduct(name:$name description:$description 
-      starting_price:$starting_price category:$category image:$image) {
+      starting_price:$starting_price category:$category) {
         starting_price
     }
   }`;

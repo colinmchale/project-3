@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 
+const imageArray = ['spin.jpg', 'cookie-tin.jpg', 'camera.jpg', 'bike.jpg'];
+
 const productSchema = new Schema({
     // Mongo automatically gives each model an ID right? Or should I include it here?
     name: {
@@ -11,7 +13,8 @@ const productSchema = new Schema({
         type: String,
     },
     image: {
-        type: String
+        type: String,
+        default: imageArray[Math.floor(Math.random()*5)],
     },
     date_created: {
         type: Date,

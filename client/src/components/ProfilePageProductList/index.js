@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ProductList = ( {products} ) => {
   if (!products.length) {
 
-    return <h3>No listings to yet!</h3>;
+    return <><h8>No listings to show yet!</h8><br></br><h7>------------------------------------------------------------------------------</h7></>
   }
   return (
     <div>
@@ -18,10 +18,12 @@ const ProductList = ( {products} ) => {
       <div className="card">
         <div className="card-image">
           <img src={`images/${product.image}`} alt='screenshot'/>
-          <span className="card-title">{product.name}</span>
         </div>
         <div className="card-content">
+          <span className="card-title">{product.name}</span>
         <p>{product.description}</p>
+        <p>Starting Bid: ${product.starting_price}</p>
+        <p>Current High Bid: ${product.current_price}</p>
         </div>
         <div className="card-action">
         <Link

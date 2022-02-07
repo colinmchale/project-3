@@ -22,16 +22,18 @@ const Profile = () => {
         variables: {user: myId },
     });
 
-    const myBids = userBidData?.bids
+    const myBids = userBidData?.userBids || [];
     console.log('userBidData')
     console.log(userBidData)
+    console.log('my bids')
+    console.log(myBids)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             // const mutationResponse = 
             const newProduct = await addProduct({
-                variables: { name: formState.name, description: formState.description, image: formState.image, starting_price: parseFloat(formState.starting_price), category: formState.category },
+                variables: { name: formState.name, description: formState.description, starting_price: parseFloat(formState.starting_price), category: formState.category },
             });
             console.log(newProduct);
             window.location.reload();
@@ -64,22 +66,22 @@ const Profile = () => {
                     {loading ? (
                         <div>Loading...</div>
                     ) : ( <>
-                    <h5>My Listings!</h5>
+                    <h5>Listings</h5>
                         <ProductList
                             products={products}
                             title="Some Food for Thoughts..." /> </>
                     )}
                 </div>
-                {/* <div className="col-12 col-md-8 mb-3">
+                <div className="col-12 col-md-8 mb-3">
                     {loading ? (
                         <div>Loading...</div>
                     ) : ( <>
                     <h5>Products I'm Bidding on!</h5>
                         <MyBids
-                            products={myBids}
+                            myBids={myBids}
                             title="Some Food for Thoughts..." /> </>
                     )}
-                </div> */}
+                </div>
             </div>
             <div className="row">
                 <h5>Create Product Listing</h5>
