@@ -25,11 +25,20 @@ const SingleProduct = () => {
     // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
     variables: { _id: productId },
   });
+  const { loading: bidLoading, data: bidData } = useQuery(QUERY_BIDS, {
+    variables: { product: productId },
+  });
+  // const { loading: orderLoading, data: orderData } = useQuery(QUERY_ORDERS, {
+  //   variables: { product: productId },
+  // });
 
   const product = data?.product || {};
-  console.log(product);
-  console.log(parseInt(product.expiration_time));
-  console.log(new Date(parseInt(product.expiration_time)).toString());
+  const bids = bidData?.bids || [];
+  // const order = orderData?.orders || {};
+  console.log(bids);
+  // console.log(order);
+  // console.log(parseInt(product.expiration_time));
+  // console.log(new Date(parseInt(product.expiration_time)).toString());
   
 
   setInterval(() => {
@@ -50,12 +59,6 @@ const SingleProduct = () => {
 
 
 }, 1000)
-
-
-  
-  
-
-  
 
   const styles = {
     bigDiv: {
@@ -107,6 +110,8 @@ const SingleProduct = () => {
                     toggle={toggle}
                     expiration_time={product.expiration_time}
                     setToggle={setToggle}
+                    bids={bids}
+                    // order={order}
                   />
                 </div>
               </div>

@@ -9,22 +9,16 @@ import { ADD_BID } from '../../utils/mutations';
 import { ADD_ORDER } from '../../utils/mutations';
 import { UPDATE_PRODUCT_PRICE } from '../../utils/mutations';
 
-const PlaceBid = ({ productId, current_price, expiration_time }) => {
+const PlaceBid = ({ productId, current_price, expiration_time, bids }) => {
 
   const currentHighBid = current_price;
   const [newBid, setHighBid] = useState('');
+  const [expired, setExpired] = useState(false);
   //   const [characterCount, setCharacterCount] = useState(0);
 
   const {loading, data} = useQuery(QUERY_USERS);
   const users = data?.users || [];
   const [addBid] = useMutation(ADD_BID);
-  const { data: bidData } = useQuery(QUERY_BIDS, {
-    // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
-    variables: { product: productId },
-  });
-  const bids = bidData?.bids || [];
-  console.log('this is bid data')
-  console.log(bids)
   const [addOrder] = useMutation(ADD_ORDER);
   const [updateProductPrice] = useMutation(UPDATE_PRODUCT_PRICE);
 
@@ -43,10 +37,6 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
       //         }
       //       };
       //     };
-          
-          
-
-
       const { data } = await addBid({
         variables: { price: parseFloat(newBid), product: productId },
       });
@@ -67,22 +57,23 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
     };
   }
 
-
-
-
   function expirationDate() {
     document.getElementById('bidBtn').style.display = "none";
     document.getElementById('bidInput').style.display = "none";
     try {
-      bids.forEach((bid) => {
-        if (bid.price === current_price) {
-          const { data } = addOrder({
-            variables: { buyer: bid.user._id, seller: bid.seller._id, product: productId, price: current_price }
-          })
+        const { data } = addOrder({
+          variables: { product: productId },
+        })
         }
+      // bids.forEach((bid) => {
+      //   if (bid.price === current_price) {
+      //     const { data } = addOrder({
+      //       variables: { buyer: bid.user._id, seller: bid.seller._id, product: productId, price: current_price }
+      //     })
+      //   }
 
-      })
-    } catch (err) {
+      // })
+     catch (err) {
       console.error(err);
     };
 
@@ -91,10 +82,10 @@ const PlaceBid = ({ productId, current_price, expiration_time }) => {
   setInterval(() => {
     let expiration = expiration_time
     if (expiration <= Date.now()) {
-      console.log('im an expiration');
-      console.log(expiration);
-      console.log('the time currently?');
-      console.log(Date.now());
+      // console.log('im an expiration');
+      // console.log(expiration);
+      // console.log('the time currently?');
+      // console.log(Date.now());
       expirationDate();
     } else {
       document.getElementById('bidBtn').style.visibility = "visible";
