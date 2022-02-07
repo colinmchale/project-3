@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import ProductList from '../components/ProfilePageProductList';
-import MyBids from '../components/MyBids';
+import ProductList from '../components/ProductList';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { QUERY_CATEGORIES } from '../utils/queries';
-import { QUERY_USER_BIDS } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
@@ -69,7 +67,7 @@ const Profile = () => {
                     <h5>Listings</h5>
                         <ProductList
                             products={products}
-                            title="Some Food for Thoughts..." /> </>
+                            title="Some Food for Thoughts..." /></>
                     )}
                 </div>
                 <div className="col-12 col-md-8 mb-3">
