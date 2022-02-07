@@ -14,7 +14,7 @@ const productSchema = new Schema({
     },
     image: {
         type: String,
-        default: imageArray[Math.floor(Math.random()*5)],
+        default: imageArray[Math.floor(Math.random()*4)],
     },
     date_created: {
         type: Date,
@@ -23,7 +23,7 @@ const productSchema = new Schema({
     },
     expiration_time: {
         type: Date,
-        default: new Date(Date.now() + 1000*60*2)
+        default: new Date(Date.now() + 1000*60*60)
     },
     starting_price: {
         type: Number,

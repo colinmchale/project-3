@@ -32,10 +32,8 @@ const ProductList = ({ products }) => {
               </div>
            </div>
         </div>
-        </div>
-        
-
-
+         ), 
+         </div>
   );
 };
 

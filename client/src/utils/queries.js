@@ -189,8 +189,8 @@ query orders($product: ID!) {
 `;
 
 export const QUERY_USERS_ORDERS = gql`
-query orders($user: ID!) {
-  orders(user: $user) {
+query userOrders($user: ID!) {
+  userOrders(user: $user) {
     buyer {
       _id
       firstName
@@ -211,3 +211,6 @@ query orders($user: ID!) {
 }
 `;
 
+// export const QUERY_CHECKOUT = gql`
+// query checkout($product: ID!)
+// `

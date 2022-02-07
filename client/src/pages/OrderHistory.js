@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import ProductList from "../components/ProductList";
+import OrderList from "../components/OrderList";
 import { useQuery } from "@apollo/client";
-import { QUERY_ME, QUERY_ORDERS } from "../utils/queries";
+import { QUERY_ME, QUERY_USERS_ORDERS } from "../utils/queries";
 import { QUERY_CATEGORIES } from "../utils/queries";
 import { ADD_PRODUCT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-
 const OrderHistory = () => {
+    const { loading, data } = useQuery(QUERY_ME);
+    const myId = data?.me._id;
+    const { loading: loadingUserOrders, data: orderData } = useQuery(QUERY_USERS_ORDERS, {
+        variables: {user: myId },
+    });
+  const orders = orderData?.userOrders || [];
 
-  const { loading, data } = useQuery(QUERY_ME);
-  const {loading: orderLoading, data: orderData} = useQuery(QUERY_ORDERS);
-
-  const orders = orderData?.orders || [];
+  console.log(myId);
+  console.log('orderData');
   console.log(orderData);
+  console.log('orders');
   console.log(orders);
+
 
   return (
     <div className="container center">
@@ -22,7 +28,7 @@ const OrderHistory = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <ProductList
+            <OrderList
               className="align-content-center justify-content-center"
               products={orders}
               title="Some Food for Thoughts..."
@@ -30,9 +36,7 @@ const OrderHistory = () => {
           )}
         </div>
       </div>
-      
     </div>
   );
 };
-
 export default OrderHistory;

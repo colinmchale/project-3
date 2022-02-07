@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Order, Bid, Category } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('pk_test_51KQI9HAMwYWnp7CB5Z4LsCnEFm6zOtCtdyCo0U2uqLz3qlgvfvTM0RfAiYjGUUcgXVfB01CBfctIr5K3fqNQeDL500vZDQG65U');
 const ObjectId = require('mongodb').ObjectID;
 
 const resolvers = {
@@ -52,7 +52,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     userOrders: async (parent, { user }) => {
-      return await Order.findOne({buyer: ObjectId(user)}).populate('buyer').populate('seller').populate('product');
+      return await Order.find({buyer: ObjectId(user)}).populate('buyer').populate('seller').populate('product');
     },
     orders: async (parent, { product }) => {
       return await Order.findOne({product: ObjectId(product)}).populate('buyer').populate('seller').populate('product');
@@ -71,29 +71,29 @@ const resolvers = {
     },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      const order = new Order({ products: args.products });
+      // const order = new Order({ products: args.products });
       const line_items = [];
 
-      const { products } = await order.populate('products').execPopulate();
+      // const { products } = await order.populate('products').execPopulate();
 
-      for (let i = 0; i < products.length; i++) {
+      
         const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          name: args.products.name,
+          description: args.products.description,
+          // images: [`${url}/images/${products[i].image}`]
         });
 
         const price = await stripe.prices.create({
-          product: product.id,
-          unit_amount: products[i].price * 100,
+          product: args.product.id,
+          unit_amount: args.products.price * 100,
           currency: 'usd',
         });
 
         line_items.push({
-          price: price.id,
+          price: args.price.id,
           quantity: 1
         });
-      }
+      
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
