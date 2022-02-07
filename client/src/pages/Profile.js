@@ -77,7 +77,7 @@ const Profile = () => {
                         <div>Loading...</div>
                         ) : ( <>
                     <div style={styles.spacing}>
-                            <h4>Welcome, {myName}.</h4>
+                            <h4>Welcome, {myName}!</h4>
                         <h4>Your Listings</h4>
                     </div>
                     <br></br>
