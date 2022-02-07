@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import ProductList from '../components/ProductList';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
-import { QUERY_CATEGORIES, QUERY_ORDERS } from '../utils/queries';
+import { QUERY_CATEGORIES } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
 
-const Profile = () => {
+const OrderHistory = () => {
     const { loading: loadingCategory, data: categoryData } = useQuery(QUERY_CATEGORIES);
     const [formState, setFormState] = useState({ name: '', description: '',  image:'', starting_price:'', category:'' });
     const { loading, data } = useQuery(QUERY_ME);
@@ -106,5 +106,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
-
+export default OrderHistory;

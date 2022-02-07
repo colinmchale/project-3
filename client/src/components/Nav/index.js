@@ -54,7 +54,6 @@ function Nav() {
           <Link className="brand-logo" to="/">
             Paddle
           </Link>
-          <div className="center"><img src="images/bid.png" /></div>
           <div className="right hide-on-med-and-down" style={styles.navBar}>
             {showNavigation()}
           </div>
