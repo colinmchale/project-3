@@ -2,7 +2,14 @@ import React from "react";
 // Import `<Link>` component from React Router for internal hyperlinks
 import { Link } from "react-router-dom";
 
+
 const ProductList = ({ products }) => {
+
+  const styles = {
+    width: "100%",
+    height: "100%"
+  }
+
   if (!products.length) {
     return <h7>No Listings Yet</h7>;
   }
@@ -18,7 +25,7 @@ const ProductList = ({ products }) => {
               <div className="col s12 m7">
                 <div className="card">
                   <div className="card-image">
-                    <img src={`images/${product.image}`} alt="screenshot" />
+                    <img src={`images/${product.image}`} alt="screenshot" style={styles}/>
                   </div>
                   <div className="card-content">
                     <span className="card-title center">{product.name}</span>

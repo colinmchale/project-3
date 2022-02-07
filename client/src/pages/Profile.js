@@ -60,7 +60,7 @@ const Profile = () => {
 
     const products = data?.me.listings || [];
     return (
-        <div className="container">
+        <div className="container center">
             <div className="flex-row justify-center">
                 <div className="col-12 col-md-8 mb-3">
                     {loading ? (
@@ -68,6 +68,7 @@ const Profile = () => {
                     ) : ( <>
                     <h5>Listings</h5>
                         <ProductList
+                            className="align-content-center justify-content-center"
                             products={products}
                             title="Some Food for Thoughts..." /></>
                     )}
@@ -133,42 +134,3 @@ const Profile = () => {
 
 export default Profile;
 
-// const styles= {
-//     display: "flex",
-//     justifyContent: "center",
-// }
-
-// export default function Profile() {
-//     return (
-//         <>
-//             <div>
-//                 <div style={styles}>
-//                     <h1>My Bids</h1>
-//                 </div>
-//                 <div  style={styles}>
-//                     <div class="col s12 m5">
-//                         <div class="card-panel teal">
-//                             <span class="white-text">We will enter the image here in the card and link it to that specific product's page.
-//                             </span>
-//                             {/* <Link to={`/products/${product._id}`} /> */}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//             <div>
-//                 <div style={styles}>
-//                     <h1>My Products</h1>
-//                 </div>
-//                 <div  style={styles}>
-//                     <div class="col s12 m5">
-//                         <div class="card-panel teal">
-//                             <span class="white-text">We will enter the image here in the card and link it to that specific product's page.
-//                             </span>
-//                             {/* <Link to={`/products/${product._id}`} /> */}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
