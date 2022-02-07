@@ -15,6 +15,7 @@ const Profile = () => {
     const { loading, data } = useQuery(QUERY_ME);
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
     const myId = data?.me._id;
+    const myName = data?.me.firstName;
     // console.log('myId');
     // console.log(typeof myId);
     // console.log(myId);
@@ -63,6 +64,7 @@ const Profile = () => {
         <div className="container center">
             <div className="flex-row justify-center">
                 <div className="col-12 col-md-8 mb-3">
+                    <h5>Welcome, {myName}.</h5>
                     {loading ? (
                         <div>Loading...</div>
                     ) : ( <>

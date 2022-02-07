@@ -76,7 +76,9 @@ const SingleProduct = () => {
       maxWidth: "70%",
       maxHeight: "70%",
       marginTop: "6%",
-      marginRight: "15%"
+      marginRight: "15%",
+      borderRadius: '20px',
+      boxShadow: '3px 3px'
     }
   };
 
