@@ -73,12 +73,12 @@ const Profile = () => {
         <div className="container center">
             <div className="flex-row justify-center">
                 <div className="col-12 col-md-8 mb-3">
-                    <h5>Welcome, {myName}.</h5>
                     {loading ? (
                         <div>Loading...</div>
-                    ) : ( <>
+                        ) : ( <>
                     <div style={styles.spacing}>
-                        <h3>Listings</h3>
+                            <h4>Welcome, {myName}.</h4>
+                        <h4>Your Listings</h4>
                     </div>
                     <br></br>
                         <ProductList
@@ -92,7 +92,7 @@ const Profile = () => {
                         <div>Loading...</div>
                     ) : ( <>
                     <div style={styles.spacing}>
-                        <h3>Products I'm Bidding on!</h3>
+                        <h4>Products I'm Bidding on!</h4>
                     </div>
                     <br></br>
                         <MyBids
@@ -102,7 +102,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className="row" style={styles.createProduct}>
-                <h3>Create Product Listing</h3>
+                <h4>Create Product Listing</h4>
                 <br></br>
                 <br></br>
                 <form onSubmit={handleFormSubmit} className="col s12">
