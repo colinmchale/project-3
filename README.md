@@ -1,72 +1,71 @@
-# Getting Started with Create React App
+# Better eBay
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+<a href="#description">Description</a>
 
-## Available Scripts
+<a href="#installation">Installation</a>
 
-In the project directory, you can run:
+<a href="#usage">Usage</a>
 
-### `npm start`
+<a href="#license">License</a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<a href="#contributing">Contributing</a>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<a href="#questions">Questions</a>
 
-### `npm test`
+<div id="description"></div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Description
+This application is an auction website designed to facilitate and ease the sales process between fellow users. When coming to this site, user’s can expect a hassle-free experience in which he or she can buy, list, and sell products. Each product listed on this site has an expiration time relevant to the time it was created, and no bids are accepted once the expiration time has passed. So long as the expiration date has not passed, other users can bid on the listed products as many time as they like. There is no limit to the amount or type of products a user can list, so this application ensures user can find or sell anything they are looking for.
 
-### `npm run build`
+<div id="installation"></div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
+This project requires MongoDB, Mongoose, React, and Apollo Client. To install these, simply enter 'npm i' into the integrated terminal in the root folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+On this site, user’s will initially be brought to the homepage where all products can be viewed. Users can click on and observe each item, but they cannot bid on the products until a personal profile has been made. Users can navigate to the Sign Up page through the Nav Bar and subsequently make a profile. Once a profile has been made, users can bid on and sell products through the ‘Add Product’ button on their profile page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+User’s can build personal profiles that house the current products they are bidding on, looking to sell, and have bid highest for. When the expiration date of an item occurs, it will be removed from the main page and added to the respective user’s profile page. After these products have been automatically added to the highest bidder’s profile, that user then can go into their profile, select the products, and begin the checkout process. Whenever a user wants to view his or her previous orders, he or she can navigate to the Order History tab in the Nav Bar to find all previous orders.
 
-### `npm run eject`
+<div id="usage"></div>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
+Once all the dependencies have been installed (see instructions above if not), users can then begin deploying this application. If viewed from the product's code, simply enter 'npm run seed', 'npm run build', and 'npm run develop' into the integrated terminal in the root folder to deploy the application on a local server. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<div id="license"></div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## License
+This application is covered under the MIT license.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<div id="contributing"></div>
 
-## Learn More
+## Contributing
+Matt Reynolds, Dylan Honeyman, and Colin McHale
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<div id="questions"></div>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Questions
+Our GitHub Profiles: MattReynolds53, dhoneyman, and colinmchale (respectively)
 
-### Code Splitting
+<a href="https://github.com/MattReynolds53">Matt Reynolds GitHub Profile Link</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<a href="https://github.com/dhoneyman">Dylan Honeyman GitHub Profile Link</a>
 
-### Analyzing the Bundle Size
+<a href="https://github.com/colinmchale">Colin McHale GitHub Profile Link</a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Project GitHub Repository: https://github.com/colinmchale/project-3
 
-### Making a Progressive Web App
+Project Deployed Heroku Link: https://paddle-auction.herokuapp.com/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Screenshots
 
-### Advanced Configuration
+![](./screenshots/Homepage.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![](./screenshots/Login.png)
 
-### Deployment
+![](./screenshots/BidPage.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![](./screenshots/Profile1.png)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-////
+![](./screenshots/Profile2.png)
