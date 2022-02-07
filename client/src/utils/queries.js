@@ -154,8 +154,12 @@ export const QUERY_USER_BIDS = gql`
       lastName
     }
     product {
+    _id
       name
       description
+      expiration_time
+      image
+      current_price
     }
     price
   }

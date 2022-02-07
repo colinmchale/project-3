@@ -161,14 +161,13 @@ const resolvers = {
 
       return bid
     },
-    addProduct: async (parent, { name, description, image, starting_price, category }, context) => {
+    addProduct: async (parent, { name, description, starting_price, category }, context) => {
       // console.log(context);
       // if (context.user) {
         
         const newProduct = await Product.create({
           name,
           description,
-          image,
           starting_price,
           // current_price,
           category

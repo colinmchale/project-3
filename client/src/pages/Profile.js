@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ProductList from '../components/ProductList';
+import MyBids from '../components/MyBids';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
+import { QUERY_USER_BIDS } from '../utils/queries';
 import { QUERY_CATEGORIES } from '../utils/queries';
 import { ADD_PRODUCT } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -12,13 +14,26 @@ const Profile = () => {
     const [formState, setFormState] = useState({ name: '', description: '',  image:'', starting_price:'', category:'' });
     const { loading, data } = useQuery(QUERY_ME);
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
+    const myId = data?.me._id;
+    // console.log('myId');
+    // console.log(typeof myId);
+    // console.log(myId);
+    const { loading: loadingUserBids, data: userBidData } = useQuery(QUERY_USER_BIDS, {
+        variables: {user: myId },
+    });
+
+    const myBids = userBidData?.userBids || [];
+    console.log('userBidData')
+    console.log(userBidData)
+    console.log('my bids')
+    console.log(myBids)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             // const mutationResponse = 
             const newProduct = await addProduct({
-                variables: { name: formState.name, description: formState.description, image: formState.image, starting_price: parseFloat(formState.starting_price), category: formState.category },
+                variables: { name: formState.name, description: formState.description, starting_price: parseFloat(formState.starting_price), category: formState.category },
             });
             console.log(newProduct);
             window.location.reload();
@@ -50,10 +65,21 @@ const Profile = () => {
                 <div className="col-12 col-md-8 mb-3">
                     {loading ? (
                         <div>Loading...</div>
-                    ) : (
+                    ) : ( <>
+                    <h5>Listings</h5>
                         <ProductList
                             products={products}
-                            title="Some Food for Thoughts..." />
+                            title="Some Food for Thoughts..." /></>
+                    )}
+                </div>
+                <div className="col-12 col-md-8 mb-3">
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : ( <>
+                    <h5>Products I'm Bidding on!</h5>
+                        <MyBids
+                            myBids={myBids}
+                            title="Some Food for Thoughts..." /> </>
                     )}
                 </div>
             </div>
